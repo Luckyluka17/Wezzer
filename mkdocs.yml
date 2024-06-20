@@ -1,4 +1,7 @@
 site_name: Wezzer
+site_description: Wezzer est une application web gratuite et open-source utilisant l'api de open-meteo pour vous fournir la météo, ainsi que les prévisions.
+site_name: Wezzer
+site_url: https://luckyluka17.github.io/Wezzer
 theme:
   name: material
   logo: logo.png
@@ -20,13 +23,13 @@ theme:
         icon: material/toggle-switch-off-outline 
         name: Switch to dark mode
       primary: #32353f
-      accent: purple 
+      accent: grey 
     - scheme: slate 
       toggle:
         icon: material/toggle-switch
         name: Switch to light mode    
       primary: #32353f
-      accent: lime
+      accent: grey
   icon:
     admonition:
       note: fontawesome/solid/note-sticky
@@ -41,7 +44,7 @@ theme:
       bug: fontawesome/solid/robot
       example: fontawesome/solid/flask
       quote: fontawesome/solid/quote-left
-
+  
 extra:
   social:
     - icon: fontawesome/brands/github
@@ -67,5 +70,17 @@ markdown_extensions:
   - pymdownx.details
   - pymdownx.superfences
 
-# copyright: |
-#   Wezzer 
+plugins:
+  - blog
+  - rss:
+      match_path: blog/posts/.* 
+      date_from_meta:
+        as_creation: date
+      categories:
+        - categories
+        - tags
+      
+nav:
+  - index.md
+  - Blog:
+    - blog/index.md
