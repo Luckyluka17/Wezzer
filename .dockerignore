@@ -1,0 +1,11 @@
+*.pyc
+/.cache
+/.github
+/.venv
+/build
+/dist
+/docs
+feed.py
+mkdocs.yml
+README.md
+Wezzer.spec
