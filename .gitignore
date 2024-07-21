@@ -1,4 +1,3 @@
-
 /site
 test.json
 /docs
@@ -6,3 +5,8 @@ feed.py
 /.venv
 config.yml
 requirements.bat
+*.pyc
+*.spec
+/build
+/dist
+/.cache
