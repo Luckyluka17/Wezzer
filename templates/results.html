@@ -29,9 +29,12 @@
             <h4 style="font-size: 30px; cursor: pointer;" onclick="document.location.href='/'"><ion-icon name="home"></ion-icon></h4>
         </div>
     </div>
+    {% if n != 0 %}
     <section id="header">
         <p><ion-icon name="search"></ion-icon> Nombre de résultats : {{ n }}<br><ion-icon name="time"></ion-icon> Temps de chargement : {{ data["generationtime_ms"] }} ms</p>
     </section>
+    {% endif %}
+    
     
     <section id="details">
         {% for city in data["results"] %}
@@ -44,6 +47,37 @@
         </a>
         {% endfor %}
     </section>
+
+    {% if n == 0 %}
+        <div style="text-align: center; width: 50%; margin-left: 25%; margin-top: 25%">
+            <p><ion-icon name="help" style="font-size: 90px; color: #3e4557 !important;"></ion-icon><br/>Aucun résultat pour cette recherche. Réessayez en modifiant votre recherche, par exemple en ajoutant des tirets dans le nom de la ville.</p>
+            <br/>
+            <a type="button" class="btn btn-primary" href="#" data-bs-toggle="modal" data-bs-target="#search"><ion-icon name="search"></ion-icon> Effectuer une nouvelle recherche</a>
+            <a type="button" class="btn btn-primary" href="/#" style="margin-top: 15px;"><ion-icon name="home"></ion-icon> Retourner à l'accueil</a>
+        </div>
+
+        <div class="modal fade" id="search" tabindex="-1" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5"><ion-icon name="search"></ion-icon> Effectuer une nouvelle recherche</h1>
+                  <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="/search_city" method="get">
+                    <div class="modal-body">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Entrez le nom de la ville" name="city">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer</button>
+                        <button class="btn btn-primary" type="submit"><ion-icon name="search"></ion-icon> Rechercher</button>
+                    </div>
+                </form>
+              </div>
+            </div>
+        </div>
+    {% endif %}
 
     <script>
         window.addEventListener('load', function () {
