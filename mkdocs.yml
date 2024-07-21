@@ -95,6 +95,5 @@ plugins:
       
 nav:
   - index.md
-  - cookies.md
-  - Blog:
-    - blog/index.md
+  - install.md
+  # - cookies.md
