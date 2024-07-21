@@ -20,7 +20,6 @@ Wezzer est une application web utilisant l'API de [open-meteo](https://open-mete
 > [!IMPORTANT]  
 > Le guide d'installation a été déplacé dans [notre documentation](https://luckyluka17.github.io/Wezzer/).
 
-
 ## Contributions
 
 Les contributions à ce projet sont fermées pour le moment.
