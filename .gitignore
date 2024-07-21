@@ -4,3 +4,4 @@ test.json
 /docs
 feed.py
 /.venv
+config.yml
