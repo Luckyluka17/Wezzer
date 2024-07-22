@@ -11,3 +11,4 @@ requirements.bat
 /dist
 /.cache
 optmized.py
+static/feed.json
