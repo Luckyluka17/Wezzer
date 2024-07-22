@@ -16,6 +16,8 @@
         <link rel="prev" href="..">
       
       
+        <link rel="next" href="../blog/">
+      
       
         <link rel="alternate" type="application/rss+xml" title="Flux RSS" href="../feed_rss_created.xml">
         <link rel="alternate" type="application/rss+xml" title="Flux RSS du contenu mis à jour" href="../feed_rss_updated.xml">
@@ -317,6 +319,23 @@
   
 
       
+        
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../blog/" class="md-tabs__link">
+        
+  
+    
+  
+  Blog
+
+      </a>
+    </li>
+  
+
+      
     </ul>
   </div>
 </nav>
@@ -468,10 +487,65 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#gerer-les-parametres-de-linstance" class="md-nav__link">
+    <span class="md-ellipsis">
+      Gérer les paramètres de l'instance
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Gérer les paramètres de l'instance">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#acceder-au-fichier-de-configuration" class="md-nav__link">
+    <span class="md-ellipsis">
+      Accéder au fichier de configuration
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#liste-des-parametres-disponibles" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liste des paramètres disponibles
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
       
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    
+  
+  
+    <li class="md-nav__item">
+      <a href="../blog/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Blog
+  </span>
+  
+
+      </a>
     </li>
   
 
@@ -504,18 +578,24 @@
 </div>
 <ol>
 <li>
+<p>Cloner le dépôt
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>git clone https://github.com/Luckyluka17/Wezzer
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>cd Wezzer
+</code></pre></div></p>
+</li>
+<li>
 <p>Créer l'image Docker
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>docker build -t wezzer .
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker build -t wezzer .
 </code></pre></div></p>
 </li>
 <li>
 <p>Exécuter le conteneur
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>docker run -p 8080:8080 wezzer
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker run -p 8080:8080 wezzer
 </code></pre></div></p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>Si vous souhaitez que le conteneur redémarre avec votre système, vous pouvez utiliser la commande suivante :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>docker run -p 8080:8080 wezzer --restart=always
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker run -p 8080:8080 wezzer --restart=always
 </code></pre></div></p>
 </div>
 </li>
@@ -525,12 +605,8 @@
 <ol>
 <li>
 <p>Cloner le dépôt
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Luckyluka17/Wezzer.git
-</code></pre></div></p>
-</li>
-<li>
-<p>Accéder au répertoire du projet
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="nb">cd</span><span class="w"> </span>Wezzer
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Luckyluka17/Wezzer.git
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="nb">cd</span><span class="w"> </span>Wezzer
 </code></pre></div></p>
 </li>
 <li>
@@ -606,13 +682,53 @@
 </code></pre></div></p>
 </li>
 </ol>
-<!-- ## Paramétrer Wezzer
-
-### Créer un ficher de configuration
-
-```
-nano config.yml
-``` -->
+<h2 id="gerer-les-parametres-de-linstance">Gérer les paramètres de l'instance</h2>
+<h3 id="acceder-au-fichier-de-configuration">Accéder au fichier de configuration</h3>
+<p>Pour modifier les paramètres par défaut de votre instance, ouvrez un terminal situé dans le répertoire de Wezzer, puis entrez la commande suivante :</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>nano<span class="w"> </span>config.yml
+</code></pre></div>
+<p><img alt="alt text" src="../image.png" /></p>
+<div class="admonition warning">
+<p class="admonition-title">Important</p>
+<p>Si vous êtes sur Windows, veuillez installer <a href="https://community.chocolatey.org/packages/nano">nano</a> via le gestionnaire de paquets <a href="https://chocolatey.org/install">chocolatey</a>.</p>
+</div>
+<h3 id="liste-des-parametres-disponibles">Liste des paramètres disponibles</h3>
+<table>
+<thead>
+<tr>
+<th>Nom du paramètre</th>
+<th>Type de valeur</th>
+<th>Valeur par défaut</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>api</strong></td>
+<td><code>string</code> (texte)</td>
+<td><code>api.open-meteo.com</code></td>
+<td>Permet de changer le domaine de l'API, afin d'utiliser une API alternative basée sur celle d'Open-Meteo.</td>
+</tr>
+<tr>
+<td><strong>server_description</strong></td>
+<td><code>string</code> (texte)</td>
+<td>vide</td>
+<td>Ajoutez une description à votre serveur visible par les utilisateurs</td>
+</tr>
+<tr>
+<td><strong>proxy_country_code</strong></td>
+<td><code>string</code> (texte)</td>
+<td><code>all</code></td>
+<td>Définit la localisation du proxy. Veuillez consulter <a href="https://docs.proxyscrape.com/">cette page</a> pour avoir plus de détails</td>
+</tr>
+<tr>
+<td><strong>proxy_max_timeout</strong></td>
+<td><code>int</code> (nombre entier)</td>
+<td><code>50</code></td>
+<td>Définit la latence maximale du proxy ; par exemple, en spécifiant 50, Wezzer n'utilisera que des proxys avec une latence inférieure ou égale à 50 ms.</td>
+</tr>
+</tbody>
+</table>
 
 
 
