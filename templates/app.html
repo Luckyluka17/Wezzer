@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wezzer | {{ version }}</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <link rel="shortcut icon" href="/static/images/logo.png" type="image/x-icon">
+    <script src="/static/js/core.js"></script>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <!-- ECRAN DE CHARGEMENT -->
+    <div id="loader">
+        <img src="/static/images/logo.png" alt="Chargement en cours...">
+        <br/>
+        <h1 style="margin-left: 10px;">Wezzer <span class="badge text-bg-success">beta</span></h1>
+        <p>Récupération des données</p>
+        <span class="loading"></span>
+    </div>
+
+    <div class="nav">
+        <p data-bs-toggle="modal" data-bs-target="#location-change" style="cursor: pointer;"><ion-icon name="location"></ion-icon> {{loc["cityname"]}}<br></p>
+        <div id="nav-btn">
+            <h4 style="font-size: 30px;"><ion-icon name="notifications" id="bell" data-bs-toggle="modal" data-bs-target="#notifications"></ion-icon><ion-icon name="cog"  data-bs-toggle="modal" data-bs-target="#settings" style="cursor: pointer;" id="set-icon"></ion-icon></h4>
+        </div>
+    </div>
+    <section id="header">
+        {% if raw["hourly"]["precipitation_probability"][time] > 50 and raw["hourly"]["rain"][time] >= 0.10 or raw["hourly"]["precipitation_probability"][time] > 95%}
+            <h1 id="weather-logo"><ion-icon name="rainy"></ion-icon></h1>
+        {% elif raw["hourly"]["cloud_cover"][time] > 70 %}
+            {% if raw["hourly"]["is_day"][time] == 1 %}
+                <h1 id="weather-logo"><ion-icon name="partly-sunny"></ion-icon></h1>
+            {% else %}
+                <h1 id="weather-logo"><ion-icon name="cloudy-night"></ion-icon></h1>
+            {% endif %}
+        {% elif raw["hourly"]["cloud_cover"][time] > 80 and raw["hourly"]["surface_pressure"][time] < 990 %}
+            <h1 id="weather-logo"><ion-icon name="thunderstorm"></ion-icon></h1>
+        {% else %}
+            {% if raw["current"]["is_day"] == 1 %}
+                <h1 id="weather-logo"><ion-icon name="sunny" style="color: rgb(224, 224, 26);"></ion-icon></h1>
+            {% else %}
+                <h1 id="weather-logo"><ion-icon name="moon" style="color: rgb(86, 31, 86);"></ion-icon></h1>
+            {% endif %}
+        {% endif %}
+        
+
+        <p id="text-now">Maintenant ({{ date }})</p>
+
+        {% if time != 0  %}
+            {% if raw["hourly"]["temperature_2m"][time-1] > raw["current"]["temperature_2m"]  %}
+                <h1 style="font-size: 30px;">{{ raw["current"]["temperature_2m"]|int }}° <ion-icon name="arrow-down" style="font-size: 16px !important;"></ion-icon></h1>
+            {% elif raw["hourly"]["temperature_2m"][time-1] < raw["current"]["temperature_2m"]  %}
+                <h1 style="font-size: 30px;">{{ raw["current"]["temperature_2m"]|int }}° <ion-icon name="arrow-up" style="font-size: 16px !important;"></ion-icon></h1>
+            {% else %}
+                <h1 style="font-size: 30px;">{{ raw["current"]["temperature_2m"]|int }}° <ion-icon name="arrow-forward" style="font-size: 16px !important;"></ion-icon></h1>
+            {% endif %}
+        {% endif %}
+        <p id="temp-stats"><ion-icon name="arrow-up" style="color: green"></ion-icon> {{ raw["daily"]["temperature_2m_max"][0]|int }}° <ion-icon name="arrow-down" style="color: red"></ion-icon> {{ raw["daily"]["temperature_2m_min"][0]|int }}°<br>Ressenti : {{ raw["current"]["apparent_temperature"]|int }}°</p>
+    </section>
+    <section id="previsions">
+    </section>
+    <section id="details" >
+        <div class="detail" data-bs-toggle="modal" data-bs-target="#graph-humidity" style="cursor: pointer;">
+            <br>
+            <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="water"></ion-icon> Humidité</p>
+            <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["relative_humidity_2m"] }}%</p>
+            {% if time != 0  %}
+                {% if raw["hourly"]["relative_humidity_2m"][time-1] > raw["current"]["relative_humidity_2m"]  %}
+                    <p class="detail-right" align="center"><ion-icon name="arrow-down"></ion-icon><br>baisse</p>
+                {% elif raw["hourly"]["relative_humidity_2m"][time-1] < raw["current"]["relative_humidity_2m"]  %}
+                    <p class="detail-right" align="center"><ion-icon name="arrow-up"></ion-icon><br>hausse</p>
+                {% else %}
+                    <p class="detail-right" align="center"><ion-icon name="arrow-forward"></ion-icon><br>stable</p>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="detail" data-bs-toggle="modal" data-bs-target="#graph-rain" style="cursor: pointer;">
+            <br>
+            <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="rainy"></ion-icon> Pluviométrie</p>
+            <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["rain"] }} mm</p>
+            {% if time != 0  %}
+                {% if raw["hourly"]["rain"][time-1] > raw["current"]["rain"]  %}
+                    <p class="detail-right" align="center"><ion-icon name="arrow-down"></ion-icon><br>baisse</p>
+                {% elif raw["hourly"]["rain"][time-1] < raw["current"]["rain"]  %}
+                    <p class="detail-right" align="center"><ion-icon name="arrow-up"></ion-icon><br>hausse</p>
+                {% else %}
+                    <p class="detail-right" align="center"><ion-icon name="arrow-forward"></ion-icon><br>stable</p>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="detail" data-bs-toggle="modal" data-bs-target="#graph-wind" style="cursor: pointer;">
+            <br>
+            <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="compass"></ion-icon> Vent</p>
+            {% if raw["current"]["wind_direction_10m"] > 22.5 and raw["current"]["wind_direction_10m"] <= 67.5 %}
+                <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Nord-est</i></p>
+            {% elif raw["current"]["wind_direction_10m"] > 67.5 and raw["current"]["wind_direction_10m"] <= 112.5 %}
+                <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Est</i></p>
+            {% elif raw["current"]["wind_direction_10m"] > 112.5 and raw["current"]["wind_direction_10m"] <= 157.5 %}
+                <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Sud-est</i></p>
+            {% elif raw["current"]["wind_direction_10m"] > 157.5 and raw["current"]["wind_direction_10m"] <= 202.5 %}
+                <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Sud</i></p>
+            {% elif raw["current"]["wind_direction_10m"] > 202.5 and raw["current"]["wind_direction_10m"] <= 247.5 %}
+                <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Sud-ouest</i></p>
+            {% elif raw["current"]["wind_direction_10m"] > 247.5 and raw["current"]["wind_direction_10m"] <= 292.5 %}
+                <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Ouest</i></p>
+            {% elif raw["current"]["wind_direction_10m"] > 292.5 and raw["current"]["wind_direction_10m"] <= 337.5 %}
+            <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Nord-ouest</i></p>
+            {% else %}
+                <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Nord</i></p>
+            {% endif %}
+        </div>
+        <div class="detail">
+            <br>
+            <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="speedometer"></ion-icon> Pression</p>
+            <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["surface_pressure"]|int }} hPa</p>
+            {% if time != 0  %}
+                {% if raw["hourly"]["surface_pressure"][time-1] > raw["current"]["surface_pressure"]  %}
+                    <p class="detail-right" align="center" style="transform: translateX(-100px);"><ion-icon name="arrow-down"></ion-icon><br>baisse</p>
+                {% elif raw["hourly"]["surface_pressure"][time-1] < raw["current"]["surface_pressure"]  %}
+                    <p class="detail-right" align="center" style="transform: translateX(-100px);"><ion-icon name="arrow-up"></ion-icon><br>hausse</p>
+                {% else %}
+                    <p class="detail-right" align="center" style="transform: translateX(-100px);"><ion-icon name="arrow-forward"></ion-icon><br>stable</p>
+                {% endif %}
+            {% endif %}
+        </div>
+        <div class="detail">
+            <br>
+            <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="glasses"></ion-icon> Indice UV</p>
+            <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["hourly"]["uv_index"][time]|int }}</p>
+            {% if raw["hourly"]["uv_index"][time]|int > 4 and raw["hourly"]["uv_index"][time]|int < 9 %}
+                <p class="detail-right" align="center" style="cursor: help; transform: translateX(-115px) scale(3); margin-top: 8px; color:rgb(224, 224, 26);" title="Utilisez un moyen de protection, tel que des lunettes de soleil et/ou de la crème solaire."><ion-icon name="warning"></ion-icon><br></p>
+            {% elif raw["hourly"]["uv_index"][time]|int >= 9 %}
+                <p class="detail-right" align="center" style="cursor: help; transform: translateX(-115px) scale(3); margin-top: 8px; color: red;" title="Utilisez un moyen de protection, tel que des lunettes de soleil et/ou de la crème solaire."><ion-icon name="warning"></ion-icon><br></p> 
+            {% endif %}
+        </div>
+        <div class="detail" id="hour-w-all" style="height: 215px;">
+            <br>
+            <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Ensoillement par heure (24h)</p>
+            <div class="weather-per-hour-container">
+                {% for i in range(time,time+25) %}
+                    <div class="hour-w">
+                        <ion-icon name="flash" style="font-size: 30px;"></ion-icon>
+                        {% if time == i %}
+                            <p>Actuel</p>
+                        {% else %}
+                            <p>{{ raw["hourly"]["time"][i].split("T")[1] }}</p>
+                        {% endif %}
+                        {% if raw["hourly"]["direct_radiation"][i] <= 0 %}
+                            <p class="hour-w-text">-- W/m²</p>
+                        {% else %}
+                            <p class="hour-w-text">{{ raw["hourly"]["direct_radiation"][i] }} W/m²</p>
+                        {% endif %}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+        <div class="detail" id="hour-w-all">
+            <br>
+            <p class="detail-content" style="color: #B6BBC4; overflow: auto;"><ion-icon name="time"></ion-icon> Metéo par heure (24h) <strong id="history-hourly">• <a href="#" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#weather-past"><ion-icon name="time"></ion-icon> Historique</a></strong></p>
+            <div class="weather-per-hour-container">
+                {% for i in range(time,time+25) %}
+                    <div class="hour-w">
+                        {% if raw["hourly"]["precipitation_probability"][i] > 50 and raw["hourly"]["rain"][i] >= 0.10 or raw["hourly"]["precipitation_probability"][i] > 95%}
+                            <ion-icon name="rainy" style="font-size: 30px;"></ion-icon>
+                        {% elif raw["hourly"]["cloud_cover"][i] > 70 %}
+                            {% if raw["hourly"]["is_day"][i] == 1 %}
+                                <ion-icon name="partly-sunny" style="font-size: 30px;"></ion-icon>
+                            {% else %}
+                                <ion-icon name="cloudy-night" style="font-size: 30px;"></ion-icon>
+                            {% endif %}
+                        {% elif raw["hourly"]["cloud_cover"][i] > 80 and raw["hourly"]["surface_pressure"][i] < 990 %}
+                            <ion-icon name="thunderstorm" style="font-size: 30px;"></ion-icon>
+                        {% else %}
+                            {% if raw["hourly"]["is_day"][i] == 1 %}
+                                <ion-icon name="sunny" style="font-size: 30px;"></ion-icon>
+                            {% else %}
+                                <ion-icon name="moon" style="font-size: 30px;"></ion-icon>
+                            {% endif %}
+                        {% endif %}
+                        {% if time == i %}
+                            <p>Actuel</p>
+                        {% else %}
+                            <p>{{ raw["hourly"]["time"][i].split("T")[1] }}</p>
+                        {% endif %}
+                        <p class="hour-w-text"><ion-icon name="thermometer" style="margin-top: 4px;"></ion-icon> {{ raw["hourly"]["temperature_2m"][i]|int }}°</p>
+                        <p class="hour-w-text"><ion-icon name="rainy" style="margin-top: 4px; margin-right: 4px;"></ion-icon> {{ raw["hourly"]["precipitation_probability"][i] }}%</p>
+                    </div>
+                    
+                    <!-- Récupération du lever et du coucher du soleil pour la journée actuelle -->
+                    {% if raw["hourly"]["time"][i][0:13] == raw["daily"]["sunrise"][0][0:13] %}
+                    <div class="hour-w">
+                        <!-- <ion-icon name="cafe" style="font-size: 30px;"></ion-icon> -->
+                         <img srcset="/static/images/sunrise.svg" width="30px" style="margin-bottom: 2px; filter: invert(100%) sepia(0%) saturate(485%) hue-rotate(119deg) brightness(115%) contrast(100%);">
+                        <p>{{ raw["daily"]["sunrise"][0].split("T")[1] }}</p>
+                        <p class="hour-w-text">Lever du soleil</p>
+                    </div>
+                    {% elif raw["hourly"]["time"][i][0:13] == raw["daily"]["sunrise"][1][0:13] %}
+                    <div class="hour-w">
+                        <!-- <ion-icon name="cafe" style="font-size: 30px;"></ion-icon> -->
+                         <img srcset="/static/images/sunrise.svg" width="30px" style="margin-bottom: 2px; filter: invert(100%) sepia(0%) saturate(485%) hue-rotate(119deg) brightness(115%) contrast(100%);">
+                        <p>{{ raw["daily"]["sunrise"][1].split("T")[1] }}</p>
+                        <p class="hour-w-text">Lever du soleil</p>
+                    </div>
+                    {% endif %}
+
+                
+                    {% if raw["hourly"]["time"][i][0:13] == raw["daily"]["sunset"][0][0:13] %}
+                    <div class="hour-w">
+                        <!-- <ion-icon name="bed" style="font-size: 30px;"></ion-icon> -->
+                        <img srcset="/static/images/sunset.svg" width="30px" style="margin-bottom: 2px; filter: invert(100%) sepia(0%) saturate(485%) hue-rotate(119deg) brightness(115%) contrast(100%);">
+                        <p>{{ raw["daily"]["sunset"][0].split("T")[1] }}</p>
+                        <p class="hour-w-text">Coucher du soleil</p>
+                    </div>
+                    {% elif raw["hourly"]["time"][i][0:13] == raw["daily"]["sunset"][1][0:13] %}
+                    <div class="hour-w">
+                        <!-- <ion-icon name="bed" style="font-size: 30px;"></ion-icon> -->
+                        <img srcset="/static/images/sunset.svg" width="30px" style="margin-bottom: 2px; filter: invert(100%) sepia(0%) saturate(485%) hue-rotate(119deg) brightness(115%) contrast(100%);">
+                        <p>{{ raw["daily"]["sunset"][1].split("T")[1] }}</p>
+                        <p class="hour-w-text">Coucher du soleil</p>
+                    </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="actions">
+                <a type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#weather-past"><ion-icon name="hourglass"></ion-icon> Détails des heures passées</a>
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle disabled" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <ion-icon name="download"></ion-icon> Exporter en
+                    </button>
+                    <ul class="dropdown-menu">
+                      <li><a class="dropdown-item" href="#"><ion-icon name="print"></ion-icon> PDF (imprimable)</a></li>
+                      <li><a class="dropdown-item" href="#"><ion-icon name="logo-html5"></ion-icon> HTML</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+        
+        <h4><ion-icon name="calendar"></ion-icon> Prévisions sur 6 jours</h4>
+        {% for i in range(1,7) %}
+            <div class="detail" id="detail-daily">
+                <br>
+                <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="calendar-number"></ion-icon> {{ raw["daily"]["time"][i] }}</p>
+                <p class="detail-content" style="bottom: 35px;" id="daily-content">
+                    <ion-icon name="umbrella"></ion-icon> Probabilité de pluie : {{ raw["daily"]["precipitation_probability_max"][i] }}%<br>
+                    <ion-icon name="thermometer"></ion-icon> Températures (max/min) : <ion-icon name="arrow-up" style="color: green"></ion-icon> {{ raw["daily"]["temperature_2m_max"][i]|int }}° <ion-icon name="arrow-down" style="color: red"></ion-icon> {{ raw["daily"]["temperature_2m_min"][i]|int }}° <br>
+                    {% if raw["daily"]["uv_index_max"][i] > 4 %}
+                        <ion-icon name="sunny"></ion-icon> Indice UV : {{ raw["daily"]["uv_index_max"][i] }} (<ion-icon name="warning"></ion-icon> Utilisez un moyen de protection)<br>
+                    {% else %}
+                        <ion-icon name="sunny"></ion-icon> Indice UV : {{ raw["daily"]["uv_index_max"][i] }}<br>
+                    {% endif %}
+                    <ion-icon name="time"></ion-icon> Lever et coucher du soleil : {{ raw["daily"]["sunrise"][i].split("T")[1] }} / {{ raw["daily"]["sunset"][i].split("T")[1] }}<br>
+                </p>
+            </div>
+        {% endfor %}
+        <hr>
+        
+        {% if proxy == {} %}
+            <div class="alert alert-danger" role="alert">
+                <ion-icon name="alert-circle"></ion-icon> Le proxy est temporairement désactivé.
+            </div>
+        {% endif %}
+        <p style="color: #909296; text-justify:inter-word;"><ion-icon name="information-circle"></ion-icon> Données issues du service <strong>open-meteo</strong>.<br><a href="#" data-bs-toggle="modal" data-bs-target="#about">À propos de cette application</a> - Localisation proxy : <img src="https://open-meteo.com/images/country-flags/{{ proxy['countryCode'] }}.svg" width="18px" style="margin-bottom: 2px;"> {{ proxy["country"] }}</p>
+        <p id="use-computer-message"><ion-icon name="laptop"></ion-icon> Veuillez utiliser un ordinateur pour profitez de toutes les fonctionnalitées.</p>
+    </section>
+    
+    <div class="modal fade" id="settings" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="cog"></ion-icon> Paramètres</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/set_settings">
+                <div class="modal-body">
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" name="sunstats">
+                        <label class="form-check-label" for="exampleCheck1">Afficher l'ensoillement par heure</label>
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" class="form-check-input" name="graphs">
+                        <label class="form-check-label" for="exampleCheck1">Activer les graphiques (expérimental)</label>
+                    </div>
+                    <h5><ion-icon name="server"></ion-icon> Gestion des cookies</h5>
+                    <div class="btn-group" role="group">
+                        <a type="button" class="btn btn-primary" href="/"><ion-icon name="refresh"></ion-icon> Rafraichir</a>
+                        <a type="button" class="btn btn-danger" href="/delete_cookies"><ion-icon name="trash"></ion-icon> Tout supprimer</a>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Retour</button>
+                    <button type="submit" class="btn btn-primary"><ion-icon name="checkmark-circle"></ion-icon> Enregistrer</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="notifications" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="notifications"></ion-icon> Notifications</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <section id="details">
+                    <p><i>Cette fonctionnalitée est en cours de développement, elle arrivera très prochainement.</i></p>
+                </section>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="graph-humidity" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="water"></ion-icon> Évolution de l'humidité dans la journée (toutes les 15 minutes)</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="/graph/humidity.png" class="graph" id="graph-humidity-img">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer le graphique</button>
+              <a type="button" class="btn btn-primary" href="/graph/humidity.png" download="Évolution de l'humidité dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="graph-rain" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="umbrella"></ion-icon> Évolution de la pluviométrie dans la journée (toutes les 15 minutes)</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="/graph/rain.png" class="graph" id="graph-rain-img">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer le graphique</button>
+              <a type="button" class="btn btn-primary" href="/graph/rain.png" download="Évolution de la pluviométrie dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="graph-wind" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="speedometer"></ion-icon> Évolution de la vitesse du vent dans la journée (toutes les 15 minutes)</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <img src="/graph/wind.png" class="graph" id="graph-wind-img">
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer le graphique</button>
+              <a type="button" class="btn btn-primary" href="/graph/wind.png" download="Évolution de la vitesse du vent dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="location-change" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="location"></ion-icon> Séléctionner une ville par défaut</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="/search_city" method="get">
+                <div class="modal-body">
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" placeholder="Entrez le nom de la ville" name="city">
+                    </div>
+                    <h5>Recherches populaires</h5>
+                    <div style="display: flex; justify-content: left;">
+                        <a class="tags" href="/set_location?cityname=Paris&country=France&latitude=48.8534951&longitude=2.3483915">Paris</a>
+                        <a class="tags" href="/set_location?cityname=Marseille&country=France&latitude=43.2961743&longitude=5.3699525">Marseille</a>
+                        <a class="tags" href="/set_location?cityname=Lyon&country=France&latitude=45.7578137&longitude=4.8320114">Lyon</a>
+                        <a class="tags" href="/set_location?cityname=Toulouse&country=France&latitude=43.6044622&longitude=1.4442469">Toulouse</a>
+                        <a class="tags" href="/set_location?cityname=Nice&country=France&latitude=43.7009358&longitude=7.2683912">Nice</a>
+                        <a class="tags" href="/set_location?cityname=Nantes&country=France&latitude=47.2186371&longitude=-1.5541362">Nantes</a>
+                        <a class="tags" href="/set_location?cityname=Montpellier&country=France&latitude=43.6112422&longitude=3.8767337">Montpellier</a>
+                    </div>
+                    <br/>
+                    <button class="btn btn-primary" type="button" onclick="getLocationAndRedirect()"><ion-icon name="locate"></ion-icon> Météo à votre position (coordonnées exactes)</button>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer</button>
+                    <button class="btn btn-primary" type="submit"><ion-icon name="search"></ion-icon> Rechercher</button>
+                </div>
+            </form>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="weather-past" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="time"></ion-icon> Historique météorologique des dernières 24h</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="detail" id="hour-w-all" style="height: 260px;">
+                    <br>
+                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Ensoillement par heure<br><ion-icon name="analytics"></ion-icon> Ensoillement total des dernières 24h : {{ past_total[0] }} W/m²</p>
+                    <div class="weather-per-hour-container">
+                        {% for i in range(time+25,time, -1) %}
+                            {% if i-25-time+1 < 0 %}
+                            <div class="hour-w">
+                                <ion-icon name="flash" style="font-size: 30px;"></ion-icon>
+                                <p>{{ i-25-time+1 }}h<br>{{ raw_past["hourly"]["time"][i].split("T")[1] }}</p>
+                                {% if raw_past["hourly"]["direct_radiation"][i] <= 0 %}
+                                    <p class="hour-w-text">-- W/m²</p>
+                                {% else %}
+                                    <p class="hour-w-text">{{ raw_past["hourly"]["direct_radiation"][i] }} W/m²</p>
+                                {% endif %}
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="detail" id="hour-w-all" style="height: 260px;">
+                    <br>
+                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Pluviométrie par heure<br><ion-icon name="analytics"></ion-icon> Précipitation totale des dernières 24h : {{ past_total[1] }} mm</p>
+                    <div class="weather-per-hour-container">
+                        {% for i in range(time+25,time, -1) %}
+                            {% if i-25-time+1 < 0 %}
+                            <div class="hour-w">
+                                <ion-icon name="rainy" style="font-size: 30px;"></ion-icon>
+                                <p>{{ i-25-time+1 }}h<br>{{ raw_past["hourly"]["time"][i].split("T")[1] }}</p>
+                                <p class="hour-w-text">{{ raw_past["hourly"]["rain"][i] }} mm</p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="detail" id="hour-w-all" style="height: 240px;">
+                    <br>
+                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Humidité par heure<br><ion-icon name="analytics"></ion-icon> Humidité moyenne des dernières 24h : {{ past_total[2] }}%</p>
+                    <div class="weather-per-hour-container">
+                        {% for i in range(time+25,time, -1) %}
+                            {% if i-25-time+1 < 0 %}
+                            <div class="hour-w">
+                                <ion-icon name="water" style="font-size: 30px;"></ion-icon>
+                                <p>{{ i-25-time+1 }}h<br>{{ raw_past["hourly"]["time"][i].split("T")[1] }}</p>
+                                <p class="hour-w-text">{{ raw_past["hourly"]["relative_humidity_2m"][i] }}%</p>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer</button>
+            </div>
+          </div>
+        </div>
+    </div>
+    <div class="modal fade" id="about" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="information-circle"></ion-icon> À propos de cette application</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <p>Wezzer est une application libre et gratuite offrant un accès illimité aux données météorologiques. Si vous trouvez notre application utile, nous vous invitons à nous soutenir par un don sur <a href="https://buymeacoffee.com/Luckyluka17">BuyMeACoffee</a>, afin de nous aider à couvrir les frais des serveurs.<br><ion-icon name="information-circle"></ion-icon> Application créée et maintenue par <a href="https://github.com/Luckyluka17" target="_blank">Luckyluka17</a>.</p>
+                <h4>Crédits & remerciements</h4>
+                <div class="avatars">
+                    <div class="ppl">
+                        <img src="https://a.deviantart.net/avatars-big/b/o/bokehlicia.jpg?5">
+                        <p>bokehlicia<br><a href="https://www.deviantart.com/bokehlicia"><ion-icon name="logo-deviantart"></ion-icon> Deviantart</a></p>
+                    </div>
+                    <div class="ppl">
+                        <img src="https://avatars.githubusercontent.com/u/156924433?v=4">
+                        <p>LoulouRoi<br><a href="https://github.com/LoulouRoi"><ion-icon name="logo-github"></ion-icon> Github</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <a type="button" class="btn btn-primary" href="https://github.com/Luckyluka17/Wezzer"><ion-icon name="logo-github"></ion-icon> Dépôt Github (officiel)</a>
+                <a type="button" class="btn btn-primary disabled" href="#"><ion-icon name="logo-docker"></ion-icon> Image Docker officielle</a>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer</button>
+            </div>
+          </div>
+        </div>
+    </div>
+
+    <div class="toast-container position-fixed bottom-0 end-0 p-3">
+        <div id="liveToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="toast-header">
+            <img src="/static/images/logo.png" class="rounded me-2" alt="Logo du site" width="20px">
+            <strong class="me-auto">Information relative aux cookies</strong>
+            <small>maintenant</small>
+            <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+          </div>
+          <div class="toast-body" style="color : black;">
+            Afin de vous permettre de sauvegarder vos paramètres, le site utilise des cookies. Aucun cookie tiers n'est utilisé et la gestion des cookies est disponible dans les paramètres.
+          </div>
+        </div>
+      </div>
+
+    <script>
+        window.addEventListener('load', function () {
+            var loader = document.getElementById('loader');
+            loader.style.display = 'none';
+
+            const toastLiveExample = document.getElementById('liveToast')
+            const toast = new bootstrap.Toast(toastLiveExample)
+
+            toast.show()
+
+            reloadImages(3);
+        });
+    </script>
+</body>
+</html>
