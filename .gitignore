@@ -1,8 +1,8 @@
 /site
 test.json
-/docs
 feed.py
 /.venv
+/docs/blog
 config.yml
 requirements.bat
 *.pyc
