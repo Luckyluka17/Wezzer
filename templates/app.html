@@ -17,8 +17,8 @@
     <div id="loader">
         <img src="/static/images/logo.png" alt="Chargement en cours...">
         <br/>
-        <h1 style="margin-left: 10px;">Wezzer <span class="badge text-bg-success">beta</span></h1>
-        <p>Récupération des données</p>
+        <h1 style="margin-left: 10px;">Wezzer</h1>
+        <p>Chargement de l'application</p>
         <span class="loading"></span>
     </div>
 
@@ -278,14 +278,15 @@
             </div>
             <form action="/set_settings">
                 <div class="modal-body">
-                    <div class="mb-3 form-check">
+                    <p><i>Les paramètres sont en cours de développement.</i></p>
+                    <!-- <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" name="sunstats">
                         <label class="form-check-label" for="exampleCheck1">Afficher l'ensoillement par heure</label>
                     </div>
                     <div class="mb-3 form-check">
                         <input type="checkbox" class="form-check-input" name="graphs">
                         <label class="form-check-label" for="exampleCheck1">Activer les graphiques (expérimental)</label>
-                    </div>
+                    </div> -->
                     <h5><ion-icon name="server"></ion-icon> Gestion des cookies</h5>
                     <div class="btn-group" role="group">
                         <a type="button" class="btn btn-primary" href="/"><ion-icon name="refresh"></ion-icon> Rafraichir</a>
@@ -294,7 +295,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Retour</button>
-                    <button type="submit" class="btn btn-primary"><ion-icon name="checkmark-circle"></ion-icon> Enregistrer</button>
+                    <button type="submit" class="btn btn-primary disabled"><ion-icon name="checkmark-circle"></ion-icon> Enregistrer</button>
                 </div>
             </form>
           </div>
@@ -488,8 +489,8 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a type="button" class="btn btn-primary" href="https://github.com/Luckyluka17/Wezzer"><ion-icon name="logo-github"></ion-icon> Dépôt Github (officiel)</a>
-                <a type="button" class="btn btn-primary disabled" href="#"><ion-icon name="logo-docker"></ion-icon> Image Docker officielle</a>
+                <a type="button" class="btn btn-primary" href="https://github.com/Luckyluka17/Wezzer"><ion-icon name="logo-github"></ion-icon> Dépôt Github</a>
+                <a type="button" class="btn btn-primary disabled" href="#"><ion-icon name="logo-docker"></ion-icon> Image Docker</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer</button>
             </div>
           </div>
