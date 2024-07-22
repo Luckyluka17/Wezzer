@@ -21,6 +21,17 @@ Pour bien débuter, nous vous recommandons de lire la [documentation](https://lu
 - **📣 Sans publicité ni traqueur** : Wezzer est un projet à but non lucratif dont l'objectif est de fournir un accès simple et sans perturbation à la météo. Vous pouvez néanmoins soutenir le développement en faisant un don du montant de votre choix.
 - **🎨 Personnalisable** : Pour rendre votre instance unique, vous avez la possibilité de la personnaliser en modifiant les templates HTML et les fichiers CSS, par exemple.
 
+## Aperçus
+
+<div align="center">
+
+<img src="docs/gallery/sc1.png/" width="23%">
+<img src="docs/gallery/sc2.png/" width="23%">
+<img src="docs/gallery/sc3.png/" width="23%">
+<img src="docs/gallery/sc4.png/" width="23%">
+
+</div>
+
 ## Installation
 
 ### Via Docker (recommandé)
