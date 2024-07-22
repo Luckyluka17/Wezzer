@@ -4,9 +4,18 @@
 
 # Wezzer 
 
+![GitHub Release](https://img.shields.io/github/v/release/Luckyluka17/Wezzer?logo=github&label=github)
+![Docker Image Version](https://img.shields.io/docker/v/Luckyluka17/wezzer?logo=docker&label=docker)
+![GitHub Repo stars](https://img.shields.io/github/stars/Luckyluka17/Wezzer?style=flat&color=yellow)
+
+
+
+
 </div>
 
 Wezzer est une application web utilisant l'API de [open-meteo](https://open-meteo.com/) pour vous fournir la météo en temps réel ainsi que les prévisions. Cette application est conçue pour être utilisée sur les ordinateurs et les téléphones, offrant une expérience utilisateur fluide et intuitive.
+
+Pour bien débuter, nous vous recommandons de lire la [documentation](https://luckyluka17.github.io/Wezzer/).
 
 ## Fonctionnalités
 
@@ -18,7 +27,7 @@ Wezzer est une application web utilisant l'API de [open-meteo](https://open-mete
 ## Installation
 
 > [!IMPORTANT]  
-> Le guide d'installation a été déplacé dans [notre documentation](https://luckyluka17.github.io/Wezzer/).
+> Le guide d'installation a été déplacé sur [cette page](https://luckyluka17.github.io/Wezzer/install/#installation-et-utilisation) dans notre documentation.
 
 ## Contributions
 
