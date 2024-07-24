@@ -629,27 +629,36 @@
 <h4 id="creer-un-conteneur-apres-les-etapes-precedentes">Créer un conteneur (après les étapes précédentes)</h4>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>docker run -p 8080:8080 wezzer
 </code></pre></div>
+<p>Votre instance est désormais en ligne, suis l'adresse <a href="http://localhost:8080">http://localhost:8080</a>.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
-<p>Si vous souhaitez que le conteneur redémarre avec votre système, vous pouvez utiliser la commande suivante :
-<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker run -p 8080:8080 wezzer --restart=always
+<p>Vous pouvez changer le port utilisé par l'application en changeant la commande comme ceci :
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>docker run -p PORT:8080 wezzer
+</code></pre></div></p>
+<p>Exemple ; J'ai envie d'héberger mon application sur le port 5780 :
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>docker run -p 5780:8080 wezzer
 </code></pre></div></p>
 </div>
-<p>Votre instance est désormais en ligne, suis l'adresse <a href="http://localhost:8080">http://localhost:8080</a>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Astuce</p>
+<p>Si vous souhaitez que le conteneur redémarre avec votre système, vous pouvez utiliser la commande suivante :
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>docker run -p 8080:8080 wezzer --restart=alwaysd
+</code></pre></div></p>
+</div>
 <h3 id="depuis-la-source"><span class="twemoji"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.546 10.93 13.067.452a1.55 1.55 0 0 0-2.188 0L8.708 2.627l2.76 2.76a1.838 1.838 0 0 1 2.327 2.341l2.658 2.66a1.838 1.838 0 0 1 1.9 3.039 1.837 1.837 0 0 1-2.6 0 1.846 1.846 0 0 1-.404-1.996L12.86 8.955v6.525c.176.086.342.203.488.348a1.848 1.848 0 0 1 0 2.6 1.844 1.844 0 0 1-2.609 0 1.834 1.834 0 0 1 0-2.598c.182-.18.387-.316.605-.406V8.835a1.834 1.834 0 0 1-.996-2.41L7.636 3.7.45 10.881c-.6.605-.6 1.584 0 2.189l10.48 10.477a1.545 1.545 0 0 0 2.186 0l10.43-10.43a1.544 1.544 0 0 0 0-2.187"/></svg></span> Depuis la source</h3>
 <ol>
 <li>
 <p>Cloner le dépôt
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Luckyluka17/Wezzer.git
-<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="nb">cd</span><span class="w"> </span>Wezzer
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>git<span class="w"> </span>clone<span class="w"> </span>https://github.com/Luckyluka17/Wezzer.git
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="nb">cd</span><span class="w"> </span>Wezzer
 </code></pre></div></p>
 </li>
 <li>
 <p>Mettre en place l'environnement virtuel Python
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>python<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 </code></pre></div></p>
 <p>ou</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>python3<span class="w"> </span>-m<span class="w"> </span>venv<span class="w"> </span>.venv
 </code></pre></div>
 <p><img alt="⚠" class="twemoji" src="https://cdn.jsdelivr.net/gh/jdecked/twemoji@15.0.3/assets/svg/26a0.svg" title=":warning:" /> <strong>Pensez à activer l'environnement virtuel, en suivant les instructions ci dessous.</strong></p>
 <div class="admonition note">
@@ -700,27 +709,27 @@
 </li>
 <li>
 <p>Installez les dépendances Python
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </code></pre></div></p>
 <p>ou</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>pip3<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 </code></pre></div>
 </li>
 <li>
 <p>Ajustez les paramètres de votre instance
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>nano<span class="w"> </span>config.yml
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nano<span class="w"> </span>config.yml
 </code></pre></div></p>
 </li>
 <li>
 <p>Démarrer l'application
-    <div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>waitress-serve --port=8080 --threads=8 --call main:init
+    <div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>waitress-serve --port=8080 --threads=8 --call main:init
 </code></pre></div></p>
 </li>
 </ol>
 <h2 id="gerer-les-parametres-de-linstance">Gérer les paramètres de l'instance</h2>
 <h3 id="acceder-au-fichier-de-configuration">Accéder au fichier de configuration</h3>
 <p>Pour modifier les paramètres par défaut de votre instance, ouvrez un terminal situé dans le répertoire de Wezzer, puis entrez la commande suivante :</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>nano<span class="w"> </span>config.yml
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>nano<span class="w"> </span>config.yml
 </code></pre></div>
 <p><img alt="alt text" src="../image.png" /></p>
 <div class="admonition warning">
