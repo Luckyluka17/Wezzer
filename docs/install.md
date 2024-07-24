@@ -48,7 +48,7 @@ Votre instance est désormais en ligne, suis l'adresse [http://localhost:8080](h
 !!! tip "Astuce"
     Si vous souhaitez que le conteneur redémarre avec votre système, vous pouvez utiliser la commande suivante :
     ```
-    docker run -p 8080:8080 wezzer --restart=alwaysd
+    docker run -p 8080:8080 wezzer --restart=always
     ```
 
 
