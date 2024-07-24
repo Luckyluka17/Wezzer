@@ -12,7 +12,7 @@ import random
 # Créer l'application
 app = Flask(__name__)
 
-version = "dev-0.1"
+version = "0.1"
 
 plt.switch_backend('Agg')
 
