@@ -5,8 +5,11 @@ WORKDIR /app
 COPY . .
 
 RUN apt-get update && \
-    apt-get install -y nano && \
-    pip install --no-cache-dir -r requirements.txt
+    apt-get install -y nano
+
+RUN pip install --upgrade pip setuptools
+
+RUN pip install --no-cache-dir -r requirements.txt
 
 RUN echo 'api: "api.open-meteo.com"\n\
 server_description: ""\n\
