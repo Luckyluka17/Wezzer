@@ -2,7 +2,6 @@
 test.json
 feed.py
 /.venv
-/docs/blog
 config.yml
 requirements.bat
 *.pyc
@@ -12,3 +11,4 @@ requirements.bat
 /.cache
 optmized.py
 static/feed.json
+docs/blog
