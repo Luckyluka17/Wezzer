@@ -63,7 +63,6 @@ Ce projet est sous licence MIT.
 ### Permissions
 
 - **Usage commercial** : Vous pouvez utiliser ce projet à des fins commerciales.
-    - **IMPORTANT : Veuillez nous contacter à l'adresse-mail `blabla@test.com` et nous décrire votre projet avant toute utilisation commerciale.**
     - *Exemple* : Intégrer ce projet dans une application que vous vendez.
 
 - **Modification** : Vous êtes autorisé à modifier ce projet.
