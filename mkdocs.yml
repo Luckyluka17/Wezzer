@@ -83,15 +83,14 @@ repo_url: https://github.com/Luckyluka17/Wezzer
 repo_name: Luckyluka17/Wezzer
 
 plugins:
-  - blog
+  - blog:
+      authors_file: "{blog}/.authors.yml"
+      authors_profiles: true
   - search
   - rss:
-      match_path: blog/posts/.* 
+      match_path: "docs/blog/posts/.*"
       date_from_meta:
         as_creation: date
-      categories:
-        - categories
-        - tags
       
 nav:
   - index.md
