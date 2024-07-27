@@ -11,6 +11,8 @@ RUN pip install --upgrade pip setuptools
 
 RUN pip install --no-cache-dir -r requirements.txt
 
+RUN pip install waitress
+
 RUN echo 'api: "api.open-meteo.com"\n\
 server_description: ""\n\
 # Pour remplir les paramètres ci-dessous, veuillez consulter https://docs.proxyscrape.com/\n\
