@@ -12,3 +12,4 @@ requirements.bat
 optmized.py
 static/feed.json
 docs/blog
+dockerbuild.bat
