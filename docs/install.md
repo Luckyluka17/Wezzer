@@ -29,7 +29,7 @@ docker pull luckyluka17/wezzer
 
 #### Créer un conteneur (après les étapes précédentes)
 ```
-docker run -p 8080:8080 wezzer
+docker run -p 8080:8080 luckyluka17/wezzer
 ```
 
 Votre instance est désormais en ligne, suis l'adresse [http://localhost:8080](http://localhost:8080).
@@ -37,18 +37,18 @@ Votre instance est désormais en ligne, suis l'adresse [http://localhost:8080](h
 !!! info
     Vous pouvez changer le port utilisé par l'application en changeant la commande comme ceci :
     ```
-    docker run -p PORT:8080 wezzer
+    docker run -p PORT:8080 luckyluka17/wezzer
     ```
 
     Exemple ; J'ai envie d'héberger mon application sur le port 5780 :
     ```
-    docker run -p 5780:8080 wezzer
+    docker run -p 5780:8080 luckyluka17/wezzer
     ```
 
 !!! tip "Astuce"
     Si vous souhaitez que le conteneur redémarre avec votre système, vous pouvez utiliser la commande suivante :
     ```
-    docker run -p 8080:8080 wezzer --restart=always
+    docker run -p 8080:8080 luckyluka17/wezzer --restart=always
     ```
 
 

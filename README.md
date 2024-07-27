@@ -43,7 +43,7 @@ docker pull luckyluka17/wezzer
 ```
 
 ```
-docker run -p 8080:8080 wezzer
+docker run -p 8080:8080 luckyluka17/wezzer
 ```
 
 Votre application devrait être disponible sur l'adresse [localhost:8080](http://localhost:8080). Pour plus de détails, veuillez lire [la documentation](https://luckyluka17.github.io/Wezzer/install/#installation-et-utilisation).
