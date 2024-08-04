@@ -1,6 +1,5 @@
 site_name: Wezzer
 site_description: Wezzer est une application web gratuite et open-source utilisant l'api de open-meteo pour vous fournir la météo, ainsi que les prévisions.
-site_name: Wezzer
 site_url: https://luckyluka17.github.io/Wezzer
 theme:
   name: material
@@ -58,6 +57,8 @@ extra:
     - name: English
       link: /en/
       lang: en
+  rss_feed:
+    url: https://luckyluka17.github.io/Wezzer/rss_filtered.xml
 
 markdown_extensions:
   - pymdownx.highlight:
@@ -83,17 +84,15 @@ repo_url: https://github.com/Luckyluka17/Wezzer
 repo_name: Luckyluka17/Wezzer
 
 plugins:
-  - blog:
-      authors_file: "{blog}/.authors.yml"
-      authors_profiles: true
+  - blog
   - search
   - rss:
-      match_path: "docs/blog/posts/.*"
+      match_path: blog/posts/*.
       date_from_meta:
-        as_creation: date
+        as_creation: date 
       
 nav:
   - index.md
   - install.md
-  # - cookies.md
+  - custom.md
   - blog/index.md
