@@ -1,4 +1,4 @@
-# Guide de démarrage
+# :material-book: Guide de démarrage
 
 ## Installation et utilisation
 
@@ -15,6 +15,11 @@
 docker pull luckyluka17/wezzer
 ``` 
 
+Puis créez un conteneur :
+```
+docker run -p 8080:8080 luckyluka17/wezzer
+```
+
 #### Créer sa propre image Docker
 1. Cloner le dépôt
     ```
@@ -26,11 +31,10 @@ docker pull luckyluka17/wezzer
     ```
     docker build -t wezzer .
     ``` 
-
-#### Créer un conteneur (après les étapes précédentes)
-```
-docker run -p 8080:8080 luckyluka17/wezzer
-```
+3. Créer le conteneur
+    ```
+    docker run -p 8080:8080 wezzer
+    ```
 
 Votre instance est désormais en ligne, suis l'adresse [http://localhost:8080](http://localhost:8080).
 
