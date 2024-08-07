@@ -19,6 +19,8 @@ server_description: ""\n\
 proxy_country_code: "all"\n\
 proxy_max_timeout: 50' > config.yml
 
+RUN python3 -u chckupdate.py
+
 EXPOSE 8080
 
 CMD ["waitress-serve", "--port=8080", "--threads=8", "--call", "main:init"]
