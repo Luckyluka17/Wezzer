@@ -84,7 +84,7 @@ repo_url: https://github.com/Luckyluka17/Wezzer
 repo_name: Luckyluka17/Wezzer
 
 plugins:
-  - blog
+  # - blog
   - search
   - rss:
       match_path: blog/posts/*.
@@ -94,5 +94,5 @@ plugins:
 nav:
   - index.md
   - install.md
-  - custom.md
-  - blog/index.md
+  # - custom.md
+  # - blog/index.md
