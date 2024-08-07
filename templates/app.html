@@ -29,25 +29,29 @@
         </div>
     </div>
     <section id="header">
-        {% if raw["hourly"]["precipitation_probability"][time] > 50 and raw["hourly"]["rain"][time] >= 0.10 or raw["hourly"]["precipitation_probability"][time] > 95%}
-            <h1 id="weather-logo"><ion-icon name="rainy"></ion-icon></h1>
-        {% elif raw["hourly"]["cloud_cover"][time] > 70 %}
-            {% if raw["hourly"]["is_day"][time] == 1 %}
-                <h1 id="weather-logo"><ion-icon name="partly-sunny"></ion-icon></h1>
+
+        {% if raw["hourly"]["precipitation_probability"][time] > 50 and raw["hourly"]["rain"][time] >= 0.10 or raw["hourly"]["precipitation_probability"][time] > 95 %}
+            {% if raw["hourly"]["cloud_cover"][time] > 80 and raw["hourly"]["surface_pressure"][time] < 990 %}
+                <h1 id="weather-logo"><ion-icon name="thunderstorm" style="font-size: 90px;"></ion-icon></h1>
             {% else %}
-                <h1 id="weather-logo"><ion-icon name="cloudy-night"></ion-icon></h1>
+                <h1 id="weather-logo"><img srcset="/static/images/rainy.svg" width="90px"></h1>
             {% endif %}
-        {% elif raw["hourly"]["cloud_cover"][time] > 80 and raw["hourly"]["surface_pressure"][time] < 990 %}
-            <h1 id="weather-logo"><ion-icon name="thunderstorm"></ion-icon></h1>
-        {% else %}
-            {% if raw["current"]["is_day"] == 1 %}
-                <h1 id="weather-logo"><ion-icon name="sunny" style="color: rgb(224, 224, 26);"></ion-icon></h1>
+        {% elif raw["hourly"]["cloud_cover"][time] >= 50 and raw["hourly"]["cloud_cover"][time] < 60 %}
+            {% if raw["hourly"]["is_day"][time] == 1 %}
+                <h1 id="weather-logo"><img srcset="/static/images/partly-sunny.svg" width="90px"></h1>
             {% else %}
-                <h1 id="weather-logo"><ion-icon name="moon" style="color: rgb(86, 31, 86);"></ion-icon></h1>
+                <h1 id="weather-logo"><img srcset="/static/images/cloudy-night.svg" width="90px"></h1>
+            {% endif %}
+        {% elif raw["hourly"]["cloud_cover"][time] >= 60 %}
+            <h1 id="weather-logo"><ion-icon name="cloud" style="font-size: 90px; color: grey;"></ion-icon></h1>
+        {% else %}
+            {% if raw["hourly"]["is_day"][time] == 1 %}
+                <h1 id="weather-logo"><ion-icon name="sunny" style="font-size: 90px; color: #f9f23e"></ion-icon></h1>
+            {% else %}
+                <h1 id="weather-logo"><ion-icon name="moon" style="font-size: 90px; color: #433D8B"></ion-icon></h1>
             {% endif %}
         {% endif %}
         
-
         <p id="text-now">Maintenant ({{ date }})</p>
 
         {% if time != 0  %}
@@ -132,9 +136,9 @@
             <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="glasses"></ion-icon> Indice UV</p>
             <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["hourly"]["uv_index"][time]|int }}</p>
             {% if raw["hourly"]["uv_index"][time]|int > 4 and raw["hourly"]["uv_index"][time]|int < 9 %}
-                <p class="detail-right" align="center" style="cursor: help; transform: translateX(-115px) scale(3); margin-top: 8px; color:rgb(224, 224, 26);" title="Utilisez un moyen de protection, tel que des lunettes de soleil et/ou de la crème solaire."><ion-icon name="warning"></ion-icon><br></p>
+                <p class="detail-right" align="center" style="cursor: help; transform: translateX(-115px) scale(3); margin-top: 8px; color:rgb(224, 224, 26);" title="Utilisez un moyen contre l'UV."><ion-icon name="warning"></ion-icon><br></p>
             {% elif raw["hourly"]["uv_index"][time]|int >= 9 %}
-                <p class="detail-right" align="center" style="cursor: help; transform: translateX(-115px) scale(3); margin-top: 8px; color: red;" title="Utilisez un moyen de protection, tel que des lunettes de soleil et/ou de la crème solaire."><ion-icon name="warning"></ion-icon><br></p> 
+                <p class="detail-right" align="center" style="cursor: help; transform: translateX(-115px) scale(3); margin-top: 8px; color: red;" title="Utilisez un moyen contre l'UV."><ion-icon name="warning"></ion-icon><br></p> 
             {% endif %}
         </div>
         <div class="detail" id="hour-w-all" style="height: 215px;">
@@ -143,16 +147,22 @@
             <div class="weather-per-hour-container">
                 {% for i in range(time,time+25) %}
                     <div class="hour-w">
-                        <ion-icon name="flash" style="font-size: 30px;"></ion-icon>
-                        {% if time == i %}
-                            <p>Actuel</p>
-                        {% else %}
-                            <p>{{ raw["hourly"]["time"][i].split("T")[1] }}</p>
-                        {% endif %}
                         {% if raw["hourly"]["direct_radiation"][i] <= 0 %}
-                            <p class="hour-w-text">-- W/m²</p>
-                        {% else %}
-                            <p class="hour-w-text">{{ raw["hourly"]["direct_radiation"][i] }} W/m²</p>
+                                <ion-icon name="flash" style="font-size: 30px"></ion-icon>
+                                {% if time == i %}
+                                    <p>Actuel</p>
+                                {% else %}
+                                    <p>{{ raw["hourly"]["time"][i].split("T")[1] }}</p>
+                                {% endif %}
+                                <p class="hour-w-text">-- W/m²</p>
+                            {% else %}
+                                <ion-icon name="flash" style="font-size: 30px; color: #f9f23e"></ion-icon>
+                                {% if time == i %}
+                                    <p>Actuel</p>
+                                {% else %}
+                                    <p>{{ raw["hourly"]["time"][i].split("T")[1] }}</p>
+                                {% endif %}
+                                <p class="hour-w-text">{{ raw["hourly"]["direct_radiation"][i]|int }} W/m²</p>
                         {% endif %}
                     </div>
                 {% endfor %}
@@ -164,21 +174,25 @@
             <div class="weather-per-hour-container">
                 {% for i in range(time,time+25) %}
                     <div class="hour-w">
-                        {% if raw["hourly"]["precipitation_probability"][i] > 50 and raw["hourly"]["rain"][i] >= 0.10 or raw["hourly"]["precipitation_probability"][i] > 95%}
-                            <ion-icon name="rainy" style="font-size: 30px;"></ion-icon>
-                        {% elif raw["hourly"]["cloud_cover"][i] > 70 %}
-                            {% if raw["hourly"]["is_day"][i] == 1 %}
-                                <ion-icon name="partly-sunny" style="font-size: 30px;"></ion-icon>
+                        {% if raw["hourly"]["precipitation_probability"][i] > 50 and raw["hourly"]["rain"][i] >= 0.10 or raw["hourly"]["precipitation_probability"][i] > 95 %}
+                            {% if raw["hourly"]["cloud_cover"][i] > 80 and raw["hourly"]["surface_pressure"][i] < 990 %}
+                                <ion-icon name="thunderstorm" style="font-size: 30px;"></ion-icon>
                             {% else %}
-                                <ion-icon name="cloudy-night" style="font-size: 30px;"></ion-icon>
+                                <img srcset="/static/images/rainy.svg" width="30px">
                             {% endif %}
-                        {% elif raw["hourly"]["cloud_cover"][i] > 80 and raw["hourly"]["surface_pressure"][i] < 990 %}
-                            <ion-icon name="thunderstorm" style="font-size: 30px;"></ion-icon>
+                        {% elif raw["hourly"]["cloud_cover"][i] >= 50 and raw["hourly"]["cloud_cover"][i] < 60 %}
+                            {% if raw["hourly"]["is_day"][i] == 1 %}
+                                <img srcset="/static/images/partly-sunny.svg" width="30px">
+                            {% else %}
+                                <img srcset="/static/images/cloudy-night.svg" width="30px">
+                            {% endif %}
+                        {% elif raw["hourly"]["cloud_cover"][i] >= 60 %}
+                            <ion-icon name="cloud" style="font-size: 30px; color: grey;"></ion-icon>
                         {% else %}
                             {% if raw["hourly"]["is_day"][i] == 1 %}
-                                <ion-icon name="sunny" style="font-size: 30px;"></ion-icon>
+                                <ion-icon name="sunny" style="font-size: 30px; color: #f9f23e"></ion-icon>
                             {% else %}
-                                <ion-icon name="moon" style="font-size: 30px;"></ion-icon>
+                                <ion-icon name="moon" style="font-size: 30px; color: #433D8B"></ion-icon>
                             {% endif %}
                         {% endif %}
                         {% if time == i %}
@@ -194,14 +208,14 @@
                     {% if raw["hourly"]["time"][i][0:13] == raw["daily"]["sunrise"][0][0:13] %}
                     <div class="hour-w">
                         <!-- <ion-icon name="cafe" style="font-size: 30px;"></ion-icon> -->
-                         <img srcset="/static/images/sunrise.svg" width="30px" style="margin-bottom: 2px; filter: invert(100%) sepia(0%) saturate(485%) hue-rotate(119deg) brightness(115%) contrast(100%);">
+                         <img srcset="/static/images/sunrise.svg" width="30px" style="margin-bottom: 2px;">
                         <p>{{ raw["daily"]["sunrise"][0].split("T")[1] }}</p>
                         <p class="hour-w-text">Lever du soleil</p>
                     </div>
                     {% elif raw["hourly"]["time"][i][0:13] == raw["daily"]["sunrise"][1][0:13] %}
                     <div class="hour-w">
                         <!-- <ion-icon name="cafe" style="font-size: 30px;"></ion-icon> -->
-                         <img srcset="/static/images/sunrise.svg" width="30px" style="margin-bottom: 2px; filter: invert(100%) sepia(0%) saturate(485%) hue-rotate(119deg) brightness(115%) contrast(100%);">
+                        <img srcset="/static/images/sunrise.svg" width="30px" style="margin-bottom: 2px;">
                         <p>{{ raw["daily"]["sunrise"][1].split("T")[1] }}</p>
                         <p class="hour-w-text">Lever du soleil</p>
                     </div>
@@ -211,14 +225,14 @@
                     {% if raw["hourly"]["time"][i][0:13] == raw["daily"]["sunset"][0][0:13] %}
                     <div class="hour-w">
                         <!-- <ion-icon name="bed" style="font-size: 30px;"></ion-icon> -->
-                        <img srcset="/static/images/sunset.svg" width="30px" style="margin-bottom: 2px; filter: invert(100%) sepia(0%) saturate(485%) hue-rotate(119deg) brightness(115%) contrast(100%);">
+                        <img srcset="/static/images/sunset.svg" width="30px" style="margin-bottom: 2px;">
                         <p>{{ raw["daily"]["sunset"][0].split("T")[1] }}</p>
                         <p class="hour-w-text">Coucher du soleil</p>
                     </div>
                     {% elif raw["hourly"]["time"][i][0:13] == raw["daily"]["sunset"][1][0:13] %}
                     <div class="hour-w">
                         <!-- <ion-icon name="bed" style="font-size: 30px;"></ion-icon> -->
-                        <img srcset="/static/images/sunset.svg" width="30px" style="margin-bottom: 2px; filter: invert(100%) sepia(0%) saturate(485%) hue-rotate(119deg) brightness(115%) contrast(100%);">
+                        <img srcset="/static/images/sunset.svg" width="30px" style="margin-bottom: 2px;">
                         <p>{{ raw["daily"]["sunset"][1].split("T")[1] }}</p>
                         <p class="hour-w-text">Coucher du soleil</p>
                     </div>
@@ -250,7 +264,7 @@
                     <ion-icon name="umbrella"></ion-icon> Probabilité de pluie : {{ raw["daily"]["precipitation_probability_max"][i] }}%<br>
                     <ion-icon name="thermometer"></ion-icon> Températures (max/min) : <ion-icon name="arrow-up" style="color: green"></ion-icon> {{ raw["daily"]["temperature_2m_max"][i]|int }}° <ion-icon name="arrow-down" style="color: red"></ion-icon> {{ raw["daily"]["temperature_2m_min"][i]|int }}° <br>
                     {% if raw["daily"]["uv_index_max"][i] > 4 %}
-                        <ion-icon name="sunny"></ion-icon> Indice UV : {{ raw["daily"]["uv_index_max"][i] }} (<ion-icon name="warning"></ion-icon> Utilisez un moyen de protection)<br>
+                        <ion-icon name="sunny"></ion-icon> Indice UV : {{ raw["daily"]["uv_index_max"][i] }} (<ion-icon name="warning"></ion-icon> Utilisez un moyen contre l'UV)<br>
                     {% else %}
                         <ion-icon name="sunny"></ion-icon> Indice UV : {{ raw["daily"]["uv_index_max"][i] }}<br>
                     {% endif %}
@@ -267,6 +281,9 @@
         {% endif %}
         <p style="color: #909296; text-justify:inter-word;"><ion-icon name="information-circle"></ion-icon> Données issues du service <strong>open-meteo</strong>.<br><a href="#" data-bs-toggle="modal" data-bs-target="#about">À propos de cette application</a> - Localisation proxy : <img src="https://open-meteo.com/images/country-flags/{{ proxy['countryCode'] }}.svg" width="18px" style="margin-bottom: 2px;"> {{ proxy["country"] }}</p>
         <p id="use-computer-message"><ion-icon name="laptop"></ion-icon> Veuillez utiliser un ordinateur pour profitez de toutes les fonctionnalitées.</p>
+        <!-- <div class="footer-logos">
+            <img src="/static/images/footer1.png" width="145px" style="margin-right: 10px;">
+        </div> -->
     </section>
     
     <div class="modal fade" id="settings" tabindex="-1" aria-hidden="true">
@@ -411,14 +428,14 @@
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <div class="detail" id="hour-w-all" style="height: 260px;">
+                <div class="detail-past">
                     <br>
-                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Ensoillement par heure<br><ion-icon name="analytics"></ion-icon> Ensoillement total des dernières 24h : {{ past_total[0] }} W/m²</p>
+                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Ensoillement par heure<br><ion-icon name="analytics"></ion-icon> Ensoillement total des cernières 24h : {{ past_total[0] }} W/m²</p>
                     <div class="weather-per-hour-container">
                         {% for i in range(time+25,time, -1) %}
                             {% if i-25-time+1 < 0 %}
                             <div class="hour-w">
-                                <ion-icon name="flash" style="font-size: 30px;"></ion-icon>
+                                <ion-icon name="flash" style="font-size: 30px; color: #f9f23e;"></ion-icon>
                                 <p>{{ i-25-time+1 }}h<br>{{ raw_past["hourly"]["time"][i].split("T")[1] }}</p>
                                 {% if raw_past["hourly"]["direct_radiation"][i] <= 0 %}
                                     <p class="hour-w-text">-- W/m²</p>
@@ -430,14 +447,14 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="detail" id="hour-w-all" style="height: 260px;">
+                <div class="detail-past">
                     <br>
-                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Pluviométrie par heure<br><ion-icon name="analytics"></ion-icon> Précipitation totale des dernières 24h : {{ past_total[1] }} mm</p>
+                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Pluviométrie par heure<br><ion-icon name="analytics"></ion-icon> Précipitation totale ces dernières 24h : {{ past_total[1] }} mm</p>
                     <div class="weather-per-hour-container">
                         {% for i in range(time+25,time, -1) %}
                             {% if i-25-time+1 < 0 %}
                             <div class="hour-w">
-                                <ion-icon name="rainy" style="font-size: 30px;"></ion-icon>
+                                <img srcset="/static/images/rainy.svg" width="30px">
                                 <p>{{ i-25-time+1 }}h<br>{{ raw_past["hourly"]["time"][i].split("T")[1] }}</p>
                                 <p class="hour-w-text">{{ raw_past["hourly"]["rain"][i] }} mm</p>
                             </div>
@@ -445,14 +462,14 @@
                         {% endfor %}
                     </div>
                 </div>
-                <div class="detail" id="hour-w-all" style="height: 240px;">
+                <div class="detail-past">
                     <br>
-                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Humidité par heure<br><ion-icon name="analytics"></ion-icon> Humidité moyenne des dernières 24h : {{ past_total[2] }}%</p>
+                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Humidité par heure<br><ion-icon name="analytics"></ion-icon> Humidité moyenne ces dernières 24h : {{ past_total[2] }}%</p>
                     <div class="weather-per-hour-container">
                         {% for i in range(time+25,time, -1) %}
                             {% if i-25-time+1 < 0 %}
-                            <div class="hour-w">
-                                <ion-icon name="water" style="font-size: 30px;"></ion-icon>
+                            <div class="hour-w" style="margin-bottom: 20px;">
+                                <ion-icon name="water" style="font-size: 30px; color: #3da5ff;"></ion-icon>
                                 <p>{{ i-25-time+1 }}h<br>{{ raw_past["hourly"]["time"][i].split("T")[1] }}</p>
                                 <p class="hour-w-text">{{ raw_past["hourly"]["relative_humidity_2m"][i] }}%</p>
                             </div>
@@ -490,7 +507,7 @@
             </div>
             <div class="modal-footer">
                 <a type="button" class="btn btn-primary" href="https://github.com/Luckyluka17/Wezzer"><ion-icon name="logo-github"></ion-icon> Dépôt Github</a>
-                <a type="button" class="btn btn-primary disabled" href="#"><ion-icon name="logo-docker"></ion-icon> Image Docker</a>
+                <a type="button" class="btn btn-primary" href="https://hub.docker.com/r/luckyluka17/wezzer"><ion-icon name="logo-docker"></ion-icon> Image Docker</a>
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer</button>
             </div>
           </div>
@@ -520,8 +537,6 @@
             const toast = new bootstrap.Toast(toastLiveExample)
 
             toast.show()
-
-            reloadImages(3);
         });
     </script>
 </body>

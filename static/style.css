@@ -224,6 +224,18 @@ ion-icon {
     visibility: hidden;
 }
 
+.detail-past {
+    background-color: #31363F;
+    color: white;
+    width: 100%;
+    height: 280px;
+    border-radius: 5px;
+    margin-right: 5px;
+    box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+    margin-bottom: 15px;
+    transition: all 0.3s ease-in-out;
+}
+
 @media (min-width : 500px) {
     body {
         width: 50%;
@@ -292,7 +304,20 @@ ion-icon {
         font-style: normal;
     }
 
+    .detail-past {
+        background-color: #31363F;
+        color: white;
+        width: 100%;
+        height: 260px;
+        border-radius: 5px;
+        margin-right: 5px;
+        box-shadow: rgba(17, 17, 26, 0.1) 0px 4px 16px, rgba(17, 17, 26, 0.1) 0px 8px 24px, rgba(17, 17, 26, 0.1) 0px 16px 56px;
+        margin-bottom: 15px;
+        transition: all 0.3s ease-in-out;
+    }
 }
+
+
 
 #history-hourly {
     visibility: visible;
@@ -477,3 +502,8 @@ ion-icon {
     color: white;
 }
 
+footer-logos {
+    display: flex;
+    justify-content: left;
+    transform: translateY(-50px);
+}
