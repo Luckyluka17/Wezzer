@@ -27,10 +27,10 @@ Pour bien débuter, nous vous recommandons de lire la [documentation](https://lu
 
 <div align="center">
 
-<img src="docs/gallery/sc1.png" width="23%">
-<img src="docs/gallery/sc2.png" width="23%">
-<img src="docs/gallery/sc3.png" width="23%">
-<img src="docs/gallery/sc4.png" width="23%">
+<img src="gallery/fr/sc1.png" width="23%">
+<img src="gallery/fr/sc2.png" width="23%">
+<img src="gallery/fr/sc3.png" width="23%">
+<img src="gallery/fr/sc4.png" width="23%">
 
 </div>
 
