@@ -18,3 +18,4 @@ venv.bat
 updater.py
 *.xcf
 /docs
+mkdocs.yml
