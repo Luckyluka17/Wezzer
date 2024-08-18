@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wezzer | {{ version }}</title>
+    <title>Wezzer</title>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
@@ -133,6 +133,19 @@
         </div>
         <div class="detail">
             <br>
+            <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="leaf"></ion-icon> Qualité de l'air</p>
+            <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw_air["current"]["european_aqi"]|int }}</p>
+
+            {% if raw_air["current"]["european_aqi"]|int <= 25 %}
+                <p class="detail-right" align="center" style="transform: translateX(-100px);"><ion-icon name="happy"></ion-icon><br>correct</p>
+            {% elif raw_air["current"]["european_aqi"]|int > 25 and raw_air["current"]["european_aqi"]|int <= 50 %}
+                <p class="detail-right" align="center" style="transform: translateX(-100px);"><ion-icon name="sad"></ion-icon><br>médiocre</p>
+            {% elif raw_air["current"]["european_aqi"]|int > 50 %}
+                <p class="detail-right" align="center" style="transform: translateX(-100px);"><ion-icon name="alert-circle"></ion-icon><br>mauvais</p>
+            {% endif %}
+        </div>
+        <div class="detail">
+            <br>
             <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="glasses"></ion-icon> Indice UV</p>
             <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["hourly"]["uv_index"][time]|int }}</p>
             {% if raw["hourly"]["uv_index"][time]|int > 4 and raw["hourly"]["uv_index"][time]|int < 9 %}
@@ -207,14 +220,12 @@
                     <!-- Récupération du lever et du coucher du soleil pour la journée actuelle -->
                     {% if raw["hourly"]["time"][i][0:13] == raw["daily"]["sunrise"][0][0:13] %}
                     <div class="hour-w">
-                        <!-- <ion-icon name="cafe" style="font-size: 30px;"></ion-icon> -->
                          <img srcset="/static/images/sunrise.svg" width="30px" style="margin-bottom: 2px;">
                         <p>{{ raw["daily"]["sunrise"][0].split("T")[1] }}</p>
                         <p class="hour-w-text">Lever du soleil</p>
                     </div>
                     {% elif raw["hourly"]["time"][i][0:13] == raw["daily"]["sunrise"][1][0:13] %}
                     <div class="hour-w">
-                        <!-- <ion-icon name="cafe" style="font-size: 30px;"></ion-icon> -->
                         <img srcset="/static/images/sunrise.svg" width="30px" style="margin-bottom: 2px;">
                         <p>{{ raw["daily"]["sunrise"][1].split("T")[1] }}</p>
                         <p class="hour-w-text">Lever du soleil</p>
@@ -224,14 +235,12 @@
                 
                     {% if raw["hourly"]["time"][i][0:13] == raw["daily"]["sunset"][0][0:13] %}
                     <div class="hour-w">
-                        <!-- <ion-icon name="bed" style="font-size: 30px;"></ion-icon> -->
                         <img srcset="/static/images/sunset.svg" width="30px" style="margin-bottom: 2px;">
                         <p>{{ raw["daily"]["sunset"][0].split("T")[1] }}</p>
                         <p class="hour-w-text">Coucher du soleil</p>
                     </div>
                     {% elif raw["hourly"]["time"][i][0:13] == raw["daily"]["sunset"][1][0:13] %}
                     <div class="hour-w">
-                        <!-- <ion-icon name="bed" style="font-size: 30px;"></ion-icon> -->
                         <img srcset="/static/images/sunset.svg" width="30px" style="margin-bottom: 2px;">
                         <p>{{ raw["daily"]["sunset"][1].split("T")[1] }}</p>
                         <p class="hour-w-text">Coucher du soleil</p>
@@ -273,17 +282,9 @@
             </div>
         {% endfor %}
         <hr>
-        
-        {% if proxy == {} %}
-            <div class="alert alert-danger" role="alert">
-                <ion-icon name="alert-circle"></ion-icon> Le proxy est temporairement désactivé.
-            </div>
-        {% endif %}
-        <p style="color: #909296; text-justify:inter-word;"><ion-icon name="information-circle"></ion-icon> Données issues du service <strong>open-meteo</strong>.<br><a href="#" data-bs-toggle="modal" data-bs-target="#about">À propos de cette application</a> - Localisation proxy : <img src="https://open-meteo.com/images/country-flags/{{ proxy['countryCode'] }}.svg" width="18px" style="margin-bottom: 2px;"> {{ proxy["country"] }}</p>
+
+        <p style="color: #909296; text-justify:inter-word;"><ion-icon name="information-circle"></ion-icon> Données issues du service <strong>open-meteo</strong>.<br><a href="#" data-bs-toggle="modal" data-bs-target="#about">À propos de cette application</a></p>
         <p id="use-computer-message"><ion-icon name="laptop"></ion-icon> Veuillez utiliser un ordinateur pour profitez de toutes les fonctionnalitées.</p>
-        <!-- <div class="footer-logos">
-            <img src="/static/images/footer1.png" width="145px" style="margin-right: 10px;">
-        </div> -->
     </section>
     
     <div class="modal fade" id="settings" tabindex="-1" aria-hidden="true">
@@ -296,14 +297,6 @@
             <form action="/set_settings">
                 <div class="modal-body">
                     <p><i>Les paramètres sont en cours de développement.</i></p>
-                    <!-- <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" name="sunstats">
-                        <label class="form-check-label" for="exampleCheck1">Afficher l'ensoillement par heure</label>
-                    </div>
-                    <div class="mb-3 form-check">
-                        <input type="checkbox" class="form-check-input" name="graphs">
-                        <label class="form-check-label" for="exampleCheck1">Activer les graphiques (expérimental)</label>
-                    </div> -->
                     <h5><ion-icon name="server"></ion-icon> Gestion des cookies</h5>
                     <div class="btn-group" role="group">
                         <a type="button" class="btn btn-primary" href="/"><ion-icon name="refresh"></ion-icon> Rafraichir</a>
@@ -344,11 +337,11 @@
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="/graph/humidity.png" class="graph" id="graph-humidity-img">
+                <img src="/graph?dtg=relative_humidity_2m" class="graph" id="graph-humidity-img">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer le graphique</button>
-              <a type="button" class="btn btn-primary" href="/graph/humidity.png" download="Évolution de l'humidité dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
+              <a type="button" class="btn btn-primary" href="/graph?dtg=relative_humidity_2m" download="Évolution de l'humidité dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
             </div>
           </div>
         </div>
@@ -361,11 +354,11 @@
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="/graph/rain.png" class="graph" id="graph-rain-img">
+                <img src="/graph?dtg=rain" class="graph" id="graph-rain-img">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer le graphique</button>
-              <a type="button" class="btn btn-primary" href="/graph/rain.png" download="Évolution de la pluviométrie dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
+              <a type="button" class="btn btn-primary" href="/graph?dtg=rain" download="Évolution de la pluviométrie dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
             </div>
           </div>
         </div>
@@ -378,11 +371,11 @@
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                <img src="/graph/wind.png" class="graph" id="graph-wind-img">
+                <img src="/graph?dtg=wind_speed_10m" class="graph" id="graph-wind-img">
             </div>
             <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Fermer le graphique</button>
-              <a type="button" class="btn btn-primary" href="/graph/wind.png" download="Évolution de la vitesse du vent dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
+              <a type="button" class="btn btn-primary" href="/graph?dtg=wind_speed_10m" download="Évolution de la vitesse du vent dans la journée du {{ date }}"><ion-icon name="cloud-download"></ion-icon> Télécharger</a>
             </div>
           </div>
         </div>
