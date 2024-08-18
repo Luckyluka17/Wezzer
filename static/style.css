@@ -507,3 +507,20 @@ footer-logos {
     justify-content: left;
     transform: translateY(-50px);
 }
+
+.tutorial {
+    text-align: center;
+    margin-top: 100px;
+}
+
+.tutorial a {
+    margin-bottom: 5px;
+}
+
+#welcome-info {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 13.5px;
+}
