@@ -19,3 +19,4 @@ updater.py
 *.xcf
 /docs
 mkdocs.yml
+/static/themes
