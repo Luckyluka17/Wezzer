@@ -98,6 +98,10 @@ def index():
 
 @app.route("/welcome")
 def welcome():
+
+    if request.cookies.get("loc") != None:
+        return redirect("/")
+
     response = make_response(
         render_template("welcome.html")
     )
