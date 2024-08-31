@@ -44,6 +44,6 @@ def set_location():
         "country": request.args.get('country')
     }
 
-    resp.set_cookie("loc", json.dumps(raw))
+    resp.set_cookie("loc", json.dumps(raw), httponly=True, secure=True, samesite='Strict')
 
     return resp
