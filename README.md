@@ -23,6 +23,8 @@ Pour bien débuter, nous vous recommandons de lire la [documentation](https://lu
 - **📣 Sans publicité ni traqueur** : Wezzer est un projet à but non lucratif dont l'objectif est de fournir un accès simple et sans perturbation à la météo. Vous pouvez néanmoins soutenir le développement en faisant un don du montant de votre choix.
 - **🎨 Personnalisable** : Pour rendre votre instance unique, vous avez la possibilité de la personnaliser en modifiant les templates HTML et les fichiers CSS, par exemple.
 
+[**_➔_** Découvrez toutes les fonctionnalitées disponibles sur cette page](https://luckyluka17.github.io/Wezzer/#fonctionnalitees)
+
 ## Aperçus
 
 <div align="center">
@@ -52,6 +54,13 @@ Votre application devrait être disponible sur l'adresse [localhost:8080](http:/
 
 > [!IMPORTANT]  
 > Le guide d'installation complet a été déplacé sur [cette page](https://luckyluka17.github.io/Wezzer/install/#installation-et-utilisation) dans notre documentation.
+
+> [!TIP]
+> Une image Docker avec le tag `dev` est disponible et est automatiquement déployée via GitHub Actions. Cependant, veuillez noter qu'il s'agit d'une version de développement, donc non stable. Par conséquent, elle pourrait présenter des dysfonctionnements.
+> Pour la récupérer, veuillez effectuer la commande suivante : 
+> ```
+> docker pull luckyluka17/wezzer:dev
+> ```
 
 ## Contributions
 
