@@ -92,7 +92,7 @@ def index():
     )
     
     if not request.cookies.get("settings"):
-        response.set_cookie("settings", json.dumps({"solar_radiation": True, "graphs": True}))
+        response.set_cookie("settings", json.dumps({"solar_radiation": True, "graphs": True}), httponly=True, secure=True, samesite='Strict')
 
     return response
 
