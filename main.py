@@ -27,7 +27,7 @@ def api_link(location_cookie):
     latitude, longitude = json.loads(location_cookie)["location"]
 
     base_url = f"https://{config_file['api']}/v1/forecast?latitude={latitude}&longitude={longitude}&timezone=auto"
-    basic = f"{base_url}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,surface_pressure,wind_speed_10m,wind_direction_10m&minutely_15=relative_humidity_2m,rain,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,rain,surface_pressure,cloud_cover,wind_speed_10m,wind_direction_10m,uv_index,is_day,direct_radiation&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_hours,precipitation_probability_max"
+    basic = f"{base_url}&current=temperature_2m,relative_humidity_2m,apparent_temperature,is_day,precipitation,rain,surface_pressure,wind_speed_10m,wind_direction_10m&minutely_15=relative_humidity_2m,rain,wind_speed_10m&hourly=temperature_2m,relative_humidity_2m,apparent_temperature,precipitation_probability,rain,surface_pressure,cloud_cover_mid,wind_speed_10m,wind_direction_10m,uv_index,is_day,direct_radiation&daily=temperature_2m_max,temperature_2m_min,apparent_temperature_max,apparent_temperature_min,sunrise,sunset,uv_index_max,precipitation_hours,precipitation_probability_max"
     past = f"{base_url}&hourly=temperature_2m,relative_humidity_2m,rain,direct_radiation&past_days=1&forecast_days=1"
     air_quality = f"https://air-quality-api.open-meteo.com/v1/air-quality?latitude={latitude}&longitude={longitude}&current=european_aqi&forecast_days=1"
 
