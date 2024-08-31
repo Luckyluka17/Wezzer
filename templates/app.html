@@ -31,12 +31,12 @@
     <section id="header">
 
         {% if raw["hourly"]["precipitation_probability"][time] > 50 and raw["hourly"]["rain"][time] >= 0.10 or raw["hourly"]["precipitation_probability"][time] > 95 %}
-            {% if raw["hourly"]["cloud_cover"][time] > 80 and raw["hourly"]["surface_pressure"][time] < 990 %}
+            {% if raw["hourly"]["cloud_cover_mid"][time] > 80 and raw["hourly"]["surface_pressure"][time] < 990 %}
                 <h1 id="weather-logo"><ion-icon name="thunderstorm" style="font-size: 90px;"></ion-icon></h1>
             {% else %}
                 <h1 id="weather-logo"><img srcset="/static/images/rainy.svg" width="90px"></h1>
             {% endif %}
-        {% elif raw["hourly"]["cloud_cover"][time] >= 50 and raw["hourly"]["cloud_cover"][time] < 60 %}
+        {% elif raw["hourly"]["cloud_cover_mid"][time] >= 55 and raw["hourly"]["cloud_cover_mid"][time] < 75 %}
             {% if raw["hourly"]["is_day"][time] == 1 %}
                 <h1 id="weather-logo"><img srcset="/static/images/partly-sunny.svg" width="90px"></h1>
             {% else %}
@@ -188,18 +188,18 @@
                 {% for i in range(time,time+25) %}
                     <div class="hour-w">
                         {% if raw["hourly"]["precipitation_probability"][i] > 50 and raw["hourly"]["rain"][i] >= 0.10 or raw["hourly"]["precipitation_probability"][i] > 95 %}
-                            {% if raw["hourly"]["cloud_cover"][i] > 80 and raw["hourly"]["surface_pressure"][i] < 990 %}
+                            {% if raw["hourly"]["cloud_cover_mid"][i] > 80 and raw["hourly"]["surface_pressure"][i] < 990 %}
                                 <ion-icon name="thunderstorm" style="font-size: 30px;"></ion-icon>
                             {% else %}
                                 <img srcset="/static/images/rainy.svg" width="30px">
                             {% endif %}
-                        {% elif raw["hourly"]["cloud_cover"][i] >= 50 and raw["hourly"]["cloud_cover"][i] < 60 %}
+                        {% elif raw["hourly"]["cloud_cover_mid"][i] >= 55 and raw["hourly"]["cloud_cover_mid"][i] < 75 %}
                             {% if raw["hourly"]["is_day"][i] == 1 %}
                                 <img srcset="/static/images/partly-sunny.svg" width="30px">
                             {% else %}
                                 <img srcset="/static/images/cloudy-night.svg" width="30px">
                             {% endif %}
-                        {% elif raw["hourly"]["cloud_cover"][i] >= 60 %}
+                        {% elif raw["hourly"]["cloud_cover_mid"][i] >= 75 %}
                             <ion-icon name="cloud" style="font-size: 30px; color: grey;"></ion-icon>
                         {% else %}
                             {% if raw["hourly"]["is_day"][i] == 1 %}
