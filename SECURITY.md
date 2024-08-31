@@ -14,7 +14,7 @@ Merci de signaler toute vulnérabilité via [GitHub Issues](https://github.com/L
 
 Nous essayerons de vous répondre dans les plus brefs délais.
 
-## IMPORTANT: Instance non-officielles & 
+## IMPORTANT: Instance non-officielles & dépots mirroirs
 
 Si vous hébergez une instance de Wezzer, nous vous recommandons de la mettre à jour régulièrement, mais surtout de privilégier Docker pour héberger l'application. Cela améliorera la sécurité de votre instance.
 
