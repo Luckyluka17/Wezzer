@@ -10,9 +10,9 @@ Il est donc important de maintenir votre instance à jour. C'est le cas pour l'i
 
 ## Signaler une vulnérabilité
 
-Merci de signaler toute vulnérabilité via [GitHub Issues](https://github.com/Luckyluka17/Wezzer/issues), avec le label **security-vulnerability**. **S'il s'agit d'une vulnérabilité critique, veuillez la signaler [ici](https://github.com/Luckyluka17/Wezzer/security/advisories).**
+Merci de signaler toute vulnérabilité via [GitHub Issues](https://github.com/Luckyluka17/Wezzer/issues), avec le label **security-vulnerability**. 
 
-Nous essayerons de vous répondre dans les plus brefs délais.
+**S'il s'agit d'une vulnérabilité critique, veuillez la signaler via cette adresse mail : [`support@wezzer.tech`](mailto:support@wezzer.tech)**. Nous essayerons de vous répondre dans les plus brefs délais.
 
 ## IMPORTANT: Instance non-officielles & dépots mirroirs
 
