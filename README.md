@@ -16,6 +16,15 @@ Wezzer est une application web utilisant l'API de [open-meteo](https://open-mete
 
 Pour bien débuter, nous vous recommandons de lire la [documentation](https://luckyluka17.github.io/Wezzer/).
 
+### Compatiblité des navigateurs
+| Navigateur         | Statut           |
+| ---| --- |
+| Google Chrome (et navigateurs dérivés)   | ✅ Supporté |
+| Mozilla Firefox   | ❌ Non supporté |
+| Safari            | ❓ Aucun test effectué |
+| Microsoft Edge    | ✅ Supporté |
+| Internet Explorer | ❓ Aucun test effectué | 
+
 ## Fonctionnalités
 
 - **🔒 Sécurité renforcée** : Aucune donnée n'est récupérée sur le serveur hébergeant l'instance. Seuls vos paramètres sont sauvegardés, mais **uniquement** dans les cookies de votre navigateur.
