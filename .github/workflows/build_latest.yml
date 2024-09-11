@@ -31,12 +31,11 @@ jobs:
 
       - name: Tag Docker Image
         run: |
-          VERSION=${{ github.event.inputs.version }}
-          docker tag wezzer luckyluka17/wezzer:${VERSION}
+          docker tag wezzer luckyluka17/wezzer:${{ github.event.inputs.version }}
           docker tag wezzer luckyluka17/wezzer:latest
 
-      - name: Push Docker Image (latest 1/2)
-        run: docker push luckyluka17/wezzer:${VERSION}
+      - name: Push Docker Image (version spécifique)
+        run: docker push luckyluka17/wezzer:${{ github.event.inputs.version }}
 
-      - name: Push Docker Image (latest 2/2)
+      - name: Push Docker Image (latest)
         run: docker push luckyluka17/wezzer:latest
