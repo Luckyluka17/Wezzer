@@ -16,16 +16,16 @@ Wezzer est une application web utilisant l'API de [open-meteo](https://open-mete
 
 Pour bien débuter, nous vous recommandons de lire la [documentation](https://luckyluka17.github.io/Wezzer/).
 
-### [Site de démonstration](https://wezzer.tech)
+<!-- ### [Site de démonstration](https://wezzer.tech) -->
 
 ### Compatiblité des navigateurs
 | Navigateur         | Statut           |
 | ---| --- |
 | <img src="https://zupimages.net/up/24/36/384b.png" width="17px" style="vertical-align: middle;"> Google Chrome ([et navigateurs dérivés](https://fr.wikipedia.org/wiki/Chromium#Autres_navigateurs_fond%C3%A9s_sur_Chromium))   | ✅ Supporté |
 | <img src="https://logodownload.org/wp-content/uploads/2019/11/firefox-logo-1.png" width="17px" style="vertical-align: middle;"> Mozilla Firefox   | ❌ Non supporté |
-| <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/apple_safari_logo_icon_169563.png" width="17px" style="vertical-align: middle;"> Safari            | ❓ Aucun test effectué |
+| <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/apple_safari_logo_icon_169563.png" width="17px" style="vertical-align: middle;"> Safari            | ✅ Supporté |
 | <img src="https://logodownload.org/wp-content/uploads/2017/05/microsoft-edge-logo-8.png" width="17px" style="vertical-align: middle;"> Microsoft Edge    | ✅ Supporté |
-| <img src="https://logodownload.org/wp-content/uploads/2017/05/internet-explorer-logo-ie-logo-3.png" width="17px" style="vertical-align: middle;"> Internet Explorer | ❓ Aucun test effectué | 
+| <img src="https://logodownload.org/wp-content/uploads/2017/05/internet-explorer-logo-ie-logo-3.png" width="17px" style="vertical-align: middle;"> Internet Explorer | ✅ Supporté | 
 
 ## Fonctionnalités
 
@@ -66,12 +66,12 @@ Votre application devrait être disponible sur l'adresse [localhost:8080](http:/
 > [!IMPORTANT]  
 > Le guide d'installation complet a été déplacé sur [cette page](https://luckyluka17.github.io/Wezzer/install/#installation-et-utilisation) dans notre documentation.
 
-> [!TIP]
+<!-- > [!TIP]
 > Une image Docker avec le tag `dev` est disponible et est automatiquement déployée via GitHub Actions. Cependant, veuillez noter qu'il s'agit d'une version de développement, donc non stable. Par conséquent, elle pourrait présenter des dysfonctionnements.
 > Pour la récupérer, veuillez effectuer la commande suivante : 
 > ```
 > docker pull luckyluka17/wezzer:dev
-> ```
+> ``` -->
 
 ## Contributions
 
