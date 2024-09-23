@@ -1,4 +1,4 @@
-name: Déployer l'image Docker de développement
+name: Déployer l'image Docker (dernière version du dépôt Github)
 
 on: [push]
 
@@ -23,7 +23,7 @@ jobs:
         run: docker build -t wezzer .
 
       - name: Tag Docker Image
-        run: docker tag wezzer luckyluka17/wezzer:dev
+        run: docker tag wezzer luckyluka17/wezzer:latest
 
       - name: Push Docker Image
-        run: docker push luckyluka17/wezzer:dev
+        run: docker push luckyluka17/wezzer:latest
