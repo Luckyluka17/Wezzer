@@ -22,4 +22,6 @@ proxy_max_timeout: 50' > config.yml
 
 EXPOSE 8080
 
-CMD ["waitress-serve", "--port=8080", "--threads=8", "--call", "main:init"]
+ENV THREADS=16
+
+CMD /bin/sh -c "waitress-serve --port=8080 --threads=${THREADS} --call main:init"
