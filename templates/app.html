@@ -226,6 +226,7 @@
                         {% endif %}
                         <p class="hour-w-text"><ion-icon name="thermometer" style="margin-top: 4px;"></ion-icon> {{ raw["hourly"]["temperature_2m"][i]|int }}°</p>
                         <p class="hour-w-text"><ion-icon name="rainy" style="margin-top: 4px; margin-right: 4px;"></ion-icon> {{ raw["hourly"]["precipitation_probability"][i] }}%</p>
+                        <p class="hour-w-text"><ion-icon name="snow" style="margin-top: 4px; margin-right: 4px;"></ion-icon> {{ raw["hourly"]["snowfall"][i]|int }}mm</p>
                     </div>
                     
                     <!-- Récupération du lever et du coucher du soleil pour la journée actuelle -->
