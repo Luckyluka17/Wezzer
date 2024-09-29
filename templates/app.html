@@ -13,23 +13,25 @@
     <link rel="stylesheet" href="/static/style.css">
 </head>
 <body>
-    <!-- ECRAN DE CHARGEMENT -->
+    <!-- Écran de chargement -->
     <div id="loader">
         <img src="/static/images/logo.png" alt="Chargement en cours...">
         <br/>
         <h1 style="margin-left: 10px;">Wezzer</h1>
-        <p>Chargement de l'application</p>
+        <p>Chargement, patientez...</p>
         <span class="loading"></span>
     </div>
 
+    <!-- Barre d'en-tête -->
     <div class="nav">
         <p data-bs-toggle="modal" data-bs-target="#location-change" style="cursor: pointer;"><ion-icon name="location"></ion-icon> {{loc["cityname"]}}<br></p>
         <div id="nav-btn">
             <h4 style="font-size: 30px;"><ion-icon name="notifications" id="bell" data-bs-toggle="modal" data-bs-target="#notifications"></ion-icon><ion-icon name="cog"  data-bs-toggle="modal" data-bs-target="#settings" style="cursor: pointer;" id="set-icon"></ion-icon></h4>
         </div>
     </div>
-    <section id="header">
 
+    <!-- Météo actuelle -->
+    <section id="header">
         {% if raw["hourly"]["precipitation_probability"][time] > 50 and raw["hourly"]["rain"][time] >= 0.10 or raw["hourly"]["precipitation_probability"][time] > 95 %}
             {% if raw["hourly"]["cloud_cover_mid"][time] > 80 and raw["hourly"]["surface_pressure"][time] < 990 %}
                 <h1 id="weather-logo"><ion-icon name="thunderstorm" style="font-size: 90px;"></ion-icon></h1>
@@ -65,8 +67,10 @@
         {% endif %}
         <p id="temp-stats"><ion-icon name="arrow-up" style="color: green"></ion-icon> {{ raw["daily"]["temperature_2m_max"][0]|int }}° <ion-icon name="arrow-down" style="color: red"></ion-icon> {{ raw["daily"]["temperature_2m_min"][0]|int }}°<br>Ressenti : {{ raw["current"]["apparent_temperature"]|int }}°</p>
     </section>
-    <section id="previsions">
-    </section>
+
+    <!-- <section id="previsions">
+    </section> -->
+
     <section id="details" >
         <div class="detail" data-bs-toggle="modal" data-bs-target="#graph-humidity" style="cursor: pointer;">
             <br>
@@ -82,6 +86,7 @@
                 {% endif %}
             {% endif %}
         </div>
+
         <div class="detail" data-bs-toggle="modal" data-bs-target="#graph-rain" style="cursor: pointer;">
             <br>
             <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="rainy"></ion-icon> Pluviométrie</p>
@@ -96,6 +101,7 @@
                 {% endif %}
             {% endif %}
         </div>
+
         <div class="detail" data-bs-toggle="modal" data-bs-target="#graph-wind" style="cursor: pointer;">
             <br>
             <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="compass"></ion-icon> Vent</p>
@@ -117,6 +123,7 @@
                 <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ raw["current"]["wind_speed_10m"] }} km/h <i id="windir"><ion-icon name="navigate"></ion-icon> Nord</i></p>
             {% endif %}
         </div>
+
         <div class="detail">
             <br>
             <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="speedometer"></ion-icon> Pression</p>
@@ -131,6 +138,7 @@
                 {% endif %}
             {% endif %}
         </div>
+
         <div class="detail">
             <br>
             <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="leaf"></ion-icon> Qualité de l'air</p>
@@ -144,6 +152,7 @@
                 <p class="detail-right" align="center" style="transform: translateX(-100px);"><ion-icon name="alert-circle"></ion-icon><br>mauvais</p>
             {% endif %}
         </div>
+
         <div class="detail">
             <br>
             <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="glasses"></ion-icon> Indice UV</p>
@@ -154,6 +163,7 @@
                 <p class="detail-right" align="center" style="cursor: help; transform: translateX(-115px) scale(3); margin-top: 8px; color: red;" title="Utilisez un moyen contre l'UV."><ion-icon name="warning"></ion-icon><br></p> 
             {% endif %}
         </div>
+
         <div class="detail" id="hour-w-all" style="height: 215px;">
             <br>
             <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Ensoillement par heure (24h)</p>
@@ -181,6 +191,7 @@
                 {% endfor %}
             </div>
         </div>
+
         <div class="detail" id="hour-w-all">
             <br>
             <p class="detail-content" style="color: #B6BBC4; overflow: auto;"><ion-icon name="time"></ion-icon> Metéo par heure (24h) <strong id="history-hourly">• <a href="#" style="text-decoration: none;" data-bs-toggle="modal" data-bs-target="#weather-past"><ion-icon name="time"></ion-icon> Historique</a></strong></p>
@@ -311,6 +322,7 @@
           </div>
         </div>
     </div>
+
     <div class="modal fade" id="notifications" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -329,6 +341,7 @@
           </div>
         </div>
     </div>
+
     <div class="modal fade" id="graph-humidity" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -346,6 +359,7 @@
           </div>
         </div>
     </div>
+
     <div class="modal fade" id="graph-rain" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -363,6 +377,7 @@
           </div>
         </div>
     </div>
+
     <div class="modal fade" id="graph-wind" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -380,6 +395,7 @@
           </div>
         </div>
     </div>
+
     <div class="modal fade" id="location-change" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -413,6 +429,7 @@
           </div>
         </div>
     </div>
+
     <div class="modal fade" id="weather-past" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
@@ -477,6 +494,7 @@
           </div>
         </div>
     </div>
+
     <div class="modal fade" id="about" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">
           <div class="modal-content">
