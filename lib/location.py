@@ -23,7 +23,8 @@ def search_city():
         additional_results["results"] = []
 
     for result in additional_results["results"]:
-        geocoding_data["results"].append(result)
+        if not result in geocoding_data["results"]:
+            geocoding_data["results"].append(result)
 
     resp = make_response(render_template(
         "results.html",
