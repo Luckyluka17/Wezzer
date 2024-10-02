@@ -81,6 +81,9 @@ def index():
         for i in range(0, len(data_basic["hourly"]["snowfall"])):
             data_basic["hourly"]["snowfall"][i] = int(data_basic["hourly"]["snowfall"][i]*10) # Convertir en mm
 
+        for i in range(0, len(data_basic["hourly"]["direct_radiation"])):
+            data_basic["hourly"]["direct_radiation"][i] = int(round(data_basic["hourly"]["direct_radiation"][i], 0))
+
     response = make_response(
         render_template(
             "app.html",
