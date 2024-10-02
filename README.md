@@ -6,9 +6,11 @@
 
 ![GitHub Release](https://img.shields.io/github/v/release/Luckyluka17/Wezzer?logo=github&label=github)
 ![Docker Image Version](https://img.shields.io/docker/v/luckyluka17/wezzer?logo=docker&label=docker)
+![Docker Pulls](https://img.shields.io/docker/pulls/luckyluka17/wezzer?logo=docker)
 ![GitHub Repo stars](https://img.shields.io/github/stars/Luckyluka17/Wezzer?style=flat&color=yellow)
 [![](https://img.shields.io/badge/Soutenir%20le%20projet-grey?logo=buymeacoffee)](https://buymeacoffee.com/Luckyluka17)
 [![](https://img.shields.io/badge/Documentation-white?logo=materialformkdocs)](https://luckyluka17.github.io/Wezzer)
+
 
 </div>
 
