@@ -70,23 +70,13 @@ Votre application devrait être disponible sur l'adresse [localhost:8080](http:/
 > [!IMPORTANT]  
 > Le guide d'installation complet a été déplacé sur [cette page](https://luckyluka17.github.io/Wezzer/install/#installation-et-utilisation) dans notre documentation.
 
-<!-- > [!TIP]
-> Une image Docker avec le tag `dev` est disponible et est automatiquement déployée via GitHub Actions. Cependant, veuillez noter qu'il s'agit d'une version de développement, donc non stable. Par conséquent, elle pourrait présenter des dysfonctionnements.
-> Pour la récupérer, veuillez effectuer la commande suivante : 
-> ```
-> docker pull luckyluka17/wezzer:dev
-> ``` -->
-
-## Contributions
-
-Les contributions à ce projet sont fermées pour le moment.
-
-Cependant, vous pouvez aider à soutenir le financement des serveurs en faisant un don via [BuyMeACoffee](https://buymeacoffee.com/luckyluka17). Votre contribution sera grandement appréciée et aidera à maintenir le bon fonctionnement de nos services.
 ## Licence
 
-Ce projet est sous licence MIT.
+<p>Ce projet est sous licence <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0c/MIT_logo.svg/1920px-MIT_logo.svg.png" width="20px"> (MIT)</p>
 
-### Permissions
+
+<details>
+<summary>Permissions</summary>
 
 - **Usage commercial** : Vous pouvez utiliser ce projet à des fins commerciales.
     - *Exemple* : Intégrer ce projet dans une application que vous vendez.
@@ -112,3 +102,5 @@ Ce projet est sous licence MIT.
 
 - **Préservation de l'avis de droit d'auteur et de la notice de licence** : Vous devez conserver les mentions de copyright et les avis de licence dans toutes les copies ou parties substantielles du projet.
   - *Exemple* : Si vous distribuez le projet, assurez-vous que le fichier de licence MIT est inclus.
+
+</details>
