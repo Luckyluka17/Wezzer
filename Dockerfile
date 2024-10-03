@@ -26,4 +26,4 @@ EXPOSE 8080
 
 ENV THREADS=16
 
-CMD /bin/sh -c "waitress-serve --port=8080 --threads=${THREADS} --call main:init"
+CMD /bin/sh -c "python3 -u docker-init.py && waitress-serve --port=8080 --threads=${THREADS} --call main:init"
