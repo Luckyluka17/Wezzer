@@ -12,7 +12,6 @@ import io
 import os
 
 app = Flask(__name__)
-version = "0.3"
 
 with open("/data/config.yml", "r", encoding="utf-8") as f:
     config_file = yaml.safe_load(f)
