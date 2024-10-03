@@ -9,18 +9,18 @@ import numpy as np
 import pandas as pd
 import matplotlib.pyplot as plt
 import io
+import os
 
 app = Flask(__name__)
 version = "0.3"
 
+with open("/data/config.yml", "r", encoding="utf-8") as f:
+    config_file = yaml.safe_load(f)
+    f.close()
+
 # Ajouter tous les blueprints
 app.register_blueprint(location)
 app.register_blueprint(settings)
-
-# Récupérer le fichier de configuration
-with open("config.yml", "r", encoding="utf-8") as f:
-    config_file = yaml.safe_load(f)
-    f.close()
 
 def api_link(location_cookie):
 

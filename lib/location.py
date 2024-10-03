@@ -3,8 +3,9 @@ from flask import Blueprint, render_template, request, make_response, redirect
 import json
 from main import *
 from lib.proxy import *
+import os
 
-with open("config.yml", "r", encoding="utf-8") as f:
+with open("/data/config.yml", "r", encoding="utf-8") as f:
     config_file = yaml.safe_load(f)
     f.close()
 
