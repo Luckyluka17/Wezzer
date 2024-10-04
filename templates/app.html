@@ -286,6 +286,13 @@
                         <ion-icon name="sunny"></ion-icon> Indice UV : {{ raw["daily"]["uv_index_max"][i] }}<br>
                     {% endif %}
                     <ion-icon name="time"></ion-icon> Lever et coucher du soleil : {{ raw["daily"]["sunrise"][i].split("T")[1] }} / {{ raw["daily"]["sunset"][i].split("T")[1] }}<br>
+                    {% if raw["daily"]["precipitation_sum"][i] > 0  and raw["daily"]["precipitation_probability_max"][i] >= 50 %}
+                        <p class="detail-right-forecast" align="center"><img srcset="/static/images/rainy.svg" width="90px"></p>
+                    {% elif raw["daily"]["precipitation_sum"][i] > 0  and raw["daily"]["precipitation_probability_max"][i] < 50 %}
+                        <p class="detail-right-forecast" align="center"><img srcset="/static/images/partly-sunny.svg" width="90px"></p>
+                    {% else %}
+                        <p class="detail-right-forecast" align="center"><ion-icon name="sunny" style="font-size: 90px; color: #f9f23e"></ion-icon></p>
+                    {% endif %}
                 </p>
             </div>
         {% endfor %}
