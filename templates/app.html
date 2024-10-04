@@ -279,7 +279,7 @@
                 <p class="detail-content" style="color: #B6BBC4;"><ion-icon name="calendar-number"></ion-icon> {{ raw["daily"]["time"][i] }}</p>
                 <p class="detail-content" style="bottom: 35px;" id="daily-content">
                     <ion-icon name="umbrella"></ion-icon> Probabilité de pluie : {{ raw["daily"]["precipitation_probability_max"][i] }}%<br>
-                    <ion-icon name="thermometer"></ion-icon> Températures (max/min) : <ion-icon name="arrow-up" style="color: green"></ion-icon> {{ raw["daily"]["temperature_2m_max"][i]|int }}° <ion-icon name="arrow-down" style="color: red"></ion-icon> {{ raw["daily"]["temperature_2m_min"][i]|int }}° <br>
+                    <ion-icon name="thermometer"></ion-icon> Températures : <ion-icon name="arrow-up" style="color: green"></ion-icon>{{ raw["daily"]["temperature_2m_max"][i]|int }}° <ion-icon name="arrow-down" style="color: red"></ion-icon>{{ raw["daily"]["temperature_2m_min"][i]|int }}° <br>
                     {% if raw["daily"]["uv_index_max"][i] > 4 %}
                         <ion-icon name="sunny"></ion-icon> Indice UV : {{ raw["daily"]["uv_index_max"][i] }} <ion-icon name="warning" style="color: yellow;"></ion-icon><br>
                     {% else %}
