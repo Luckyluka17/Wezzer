@@ -236,6 +236,14 @@ ion-icon {
     transition: all 0.3s ease-in-out;
 }
 
+.detail-right-forecast {
+    position: relative;
+    float: right;
+    bottom: 110px;
+    left: 85px;
+    transform: translateX(-70px) translateY(-75px) scale(0.5);
+}
+
 @media (min-width : 500px) {
     body {
         width: 50%;
@@ -325,6 +333,14 @@ ion-icon {
         text-align: left !important;
         margin-right: 0px !important;
         margin-bottom: 5px;
+    }
+
+    .detail-right-forecast {
+        position: relative;
+        float: right;
+        bottom: 110px;
+        left: 85px;
+        transform: translateX(-100px) translateY(-50px) scale(1);
     }
 }
 
