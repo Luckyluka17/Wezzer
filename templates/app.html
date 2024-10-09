@@ -33,7 +33,7 @@
     <!-- Météo actuelle -->
     <section id="header">
         {% if raw["hourly"]["surface_pressure"][time-3]-raw["hourly"]["surface_pressure"][time]  >= 4 %}
-            <h1 id="weather-logo"><ion-icon name="thunderstorm" style="font-size: 90px;"></ion-icon></h1>
+            <h1 id="weather-logo"><img srcset="/static/images/thunderstorm.svg" width="90px"></h1>
         {% elif raw["hourly"]["precipitation_probability"][time] > 50 and raw["hourly"]["rain"][time] >= 0.10 or raw["hourly"]["precipitation_probability"][time] > 95 %}
             <h1 id="weather-logo"><img srcset="/static/images/rainy.svg" width="90px"></h1>
         {% elif raw["hourly"]["cloud_cover_mid"][time] >= 55 and raw["hourly"]["cloud_cover_mid"][time] < 75 %}
@@ -197,7 +197,7 @@
                 {% for i in range(time,time+25) %}
                     <div class="hour-w">
                         {% if raw["hourly"]["surface_pressure"][time-3]-raw["hourly"]["surface_pressure"][time]  >= 4 %}
-                            <ion-icon name="thunderstorm" style="font-size: 30px;"></ion-icon>
+                            <img srcset="/static/images/thunderstorm.svg" width="30px">
                         {% elif raw["hourly"]["precipitation_probability"][time] > 50 and raw["hourly"]["rain"][time] >= 0.10 or raw["hourly"]["precipitation_probability"][time] > 95 %}
                             <img srcset="/static/images/rainy.svg" width="30px">
                         {% elif raw["hourly"]["cloud_cover_mid"][i] >= 55 and raw["hourly"]["cloud_cover_mid"][i] < 75 %}
@@ -285,7 +285,7 @@
                     {% else %}
                         <ion-icon name="sunny"></ion-icon> Indice UV : {{ raw["daily"]["uv_index_max"][i] }}<br>
                     {% endif %}
-                    <ion-icon name="time"></ion-icon> Lever et coucher du soleil : {{ raw["daily"]["sunrise"][i].split("T")[1] }} / {{ raw["daily"]["sunset"][i].split("T")[1] }}<br>
+                    <ion-icon name="time"></ion-icon> Lever/coucher du soleil : {{ raw["daily"]["sunrise"][i].split("T")[1] }} / {{ raw["daily"]["sunset"][i].split("T")[1] }}<br>
                     {% if raw["daily"]["precipitation_sum"][i] > 0  and raw["daily"]["precipitation_probability_max"][i] >= 50 %}
                         <p class="detail-right-forecast" align="center"><img srcset="/static/images/rainy.svg" width="90px"></p>
                     {% elif raw["daily"]["precipitation_sum"][i] > 0  and raw["daily"]["precipitation_probability_max"][i] < 50 %}
