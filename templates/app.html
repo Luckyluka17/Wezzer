@@ -339,7 +339,11 @@
             </div>
             <div class="modal-body">
                 <section id="details">
-                    <p><i>Cette fonctionnalitée est en cours de développement, elle arrivera très prochainement.</i></p>
+                    <ul>
+                    {% for n in notifications %}
+                        <li><h5>{{ n.title }}</h5><br><p>{{ n.description }}</p></li>
+                    {% endfor %}
+                    </ul>
                 </section>
             </div>
             <div class="modal-footer">
