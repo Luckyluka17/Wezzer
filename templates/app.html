@@ -457,7 +457,7 @@
             <div class="modal-body">
                 <div class="detail-past">
                     <br>
-                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Ensoillement par heure<br><ion-icon name="analytics"></ion-icon> Ensoillement total des cernières 24h : {{ past_total[0] }} W/m²</p>
+                    <p class="detail-content" style="color: #B6BBC4; overflow: auto; "><ion-icon name="time"></ion-icon> Ensoillement par heure<br><ion-icon name="analytics"></ion-icon> Ensoillement total ces dernières 24h : {{ past_total[0] }} W/m²</p>
                     <div class="weather-per-hour-container">
                         {% for i in range(time+25,time, -1) %}
                             {% if i-25-time+1 < 0 %}
