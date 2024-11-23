@@ -5,6 +5,7 @@
 # Wezzer 
 
 ![GitHub Release](https://img.shields.io/github/v/release/Luckyluka17/Wezzer?logo=github&label=github)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/Luckyluka17/Wezzer/build_dev.yml?logo=docker&label=build)
 ![Docker Image Version](https://img.shields.io/docker/v/luckyluka17/wezzer?logo=docker&label=docker)
 ![Docker Pulls](https://img.shields.io/docker/pulls/luckyluka17/wezzer?logo=docker)
 ![Uptime Robot ratio (7 days)](https://img.shields.io/uptimerobot/ratio/7/m797637351-b2da0ca85c85926510ef34ad?logo=cloudflare)
