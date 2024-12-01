@@ -53,6 +53,8 @@ def index():
         date = data_basic["current"]["time"].replace("-", "/").split("T")[0].split("/")
         date = f"{date[2]}/{date[1]}/{date[0]}"
 
+        data_basic["is_december"] = True if str(data_basic["current"]["time"].replace("-", "/").split("T")[0].split("/")[1]) == "12" else False
+
         time = int(data_basic["current"]["time"].replace("-", "/").split("T")[1].split(":")[0])
 
         for t in range(1,7):
