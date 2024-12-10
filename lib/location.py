@@ -14,11 +14,10 @@ location = Blueprint("location", __name__)
 @location.route("/search_city", methods=["GET"])
 def search_city():
     geocoding_data = fetch_data(f"https://geocoding-api.open-meteo.com/v1/search?name={request.args.get('city')}&count=20&language=fr&format=json", config_file)
+    additional_results = fetch_data(f"https://geocoding-api.open-meteo.com/v1/search?name={request.args.get('city').replace(' ', '-')}&count=20&language=fr&format=json", config_file)
 
     if geocoding_data.get("results") == None:
         geocoding_data["results"] = []
-
-    additional_results = fetch_data(f"https://geocoding-api.open-meteo.com/v1/search?name={request.args.get('city').replace(' ', '-')}&count=20&language=fr&format=json", config_file)
 
     if additional_results.get("results") == None:
         additional_results["results"] = []
@@ -26,6 +25,10 @@ def search_city():
     for result in additional_results["results"]:
         if not result in geocoding_data["results"]:
             geocoding_data["results"].append(result)
+
+    if not geocoding_data["results"] == []:
+        for result in geocoding_data["results"]:
+            result["country_code"] = str(result["country_code"]).lower()
 
     resp = make_response(render_template(
         "results.html",
