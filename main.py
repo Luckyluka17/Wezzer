@@ -25,6 +25,7 @@ with open("/data/config.yml", "r", encoding="utf-8") as f:
 # Ajouter tous les blueprints
 app.register_blueprint(location)
 app.register_blueprint(settings)
+app.register_blueprint(filters)
 
 def api_link(location_cookie):
 
