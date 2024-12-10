@@ -327,20 +327,13 @@
               <h1 class="modal-title fs-5"><ion-icon name="cog"></ion-icon> Paramètres</h1>
               <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
-            <form action="/set_settings">
-                <div class="modal-body">
-                    <p><i>Les paramètres sont en cours de développement.</i></p>
-                    <h5><ion-icon name="server"></ion-icon> Gestion des cookies</h5>
-                    <div class="btn-group" role="group">
-                        <a type="button" class="btn btn-primary" href="/"><ion-icon name="refresh"></ion-icon> Rafraichir</a>
-                        <a type="button" class="btn btn-danger" href="/delete_cookies"><ion-icon name="trash"></ion-icon> Tout supprimer</a>
-                    </div>
+            <div class="modal-body">
+                <h5><ion-icon name="server"></ion-icon> Gestion des cookies</h5>
+                <div class="btn-group" role="group">
+                    <a type="button" class="btn btn-primary" href="/"><ion-icon name="refresh"></ion-icon> Rafraichir</a>
+                    <a type="button" class="btn btn-danger" href="/delete_cookies"><ion-icon name="trash"></ion-icon> Tout supprimer</a>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><ion-icon name="close-circle"></ion-icon> Retour</button>
-                    <button type="submit" class="btn btn-primary disabled"><ion-icon name="checkmark-circle"></ion-icon> Enregistrer</button>
-                </div>
-            </form>
+            </div>
           </div>
         </div>
     </div>
