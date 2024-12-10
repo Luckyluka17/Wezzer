@@ -47,7 +47,7 @@
         <a href="/set_location?cityname={{ city['name'] }}&country={{ city['country'] }}&latitude={{ city['latitude'] }}&longitude={{ city['longitude'] }}" style="color: white; text-decoration: none;">
             <div class="detail-result" style="cursor: pointer;">
                 <br>
-                <p class="detail-content" style="color: #B6BBC4;"><img src="https://open-meteo.com/images/country-flags/{{ city['country_code'] }}.svg" width="13px"> {{ city["country"] }}, {{ city["admin1"] }}</p>
+                <p class="detail-content" style="color: #B6BBC4;"><img src="https://open-meteo.com/images/country-flags/{{ city['country_code'] }}.svg" width="13px" style="margin-bottom: 2px;"> {{ city["country"] }}, {{ city["admin1"] }}</p>
                 <p class="detail-content" style="font-size: 30px; bottom: 35px;">{{ city["name"] }} {{ city["admin2"] }}</p>
             </div>
         </a>
