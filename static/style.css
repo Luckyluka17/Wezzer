@@ -571,8 +571,34 @@ footer-logos {
     text-align: center;
     margin-right: 15px;
 }
+
+.extra-features {
+    margin-top: 0px;
+    margin-left: 20px;
+    transform: translateY(10px);
+}
+
+.extra-features span {
+    margin-left: 5px;
+    cursor: pointer;
+}
+
 #santa_hat {
     position: absolute;
     width: 35px;
     transform: translateX(-26px) rotate(30deg) translateY(-5px);
+}
+
+#moonphase-emoji {
+    font-size: 90px;
+}
+
+#moonphase-now-informations h1 {
+    margin: 0; /* Supprime la marge par défaut du h1 */
+    line-height: 1.2; /* Ajuste l'interligne du h1 si nécessaire */
+}
+
+#moonphase-now-informations p {
+    margin: 0; /* Supprime la marge par défaut du p */
+    line-height: 1.8; /* Ajuste l'interligne du p si nécessaire */
 }

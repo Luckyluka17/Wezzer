@@ -43,6 +43,9 @@
     </div>
 
     <!-- Météo actuelle -->
+    <div class="extra-features">
+        <span class="badge rounded-pill text-bg-primary" data-bs-toggle="modal" data-bs-target="#moonphase">🌑 Phase lunaire</span>
+    </div>
     <section id="header">
         {% if raw["hourly"]["surface_pressure"][time-3]-raw["hourly"]["surface_pressure"][time]  >= 4 %}
             <h1 id="weather-logo"><img srcset="/static/images/thunderstorm.svg" width="90px"></h1>
@@ -517,6 +520,41 @@
           </div>
         </div>
     </div>
+
+    <div class="modal fade" id="moonphase" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5"><ion-icon name="moon"></ion-icon> Calendrier des phases lunaire</h1>
+              <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                {% for element in moon_phase %}
+                    {% if moon_phase | get_index(element) == 0 %}
+                        <div style="display: flex; align-items: center;">
+                            <h1 id="moonphase-emoji">{{ element[1] }}</h1>
+                            <div id="moonphase-now-informations">
+                            <h1>{{ element[0] }}</h1>
+                            <p>Aujourd'hui • Âge : {{ element[2] }} j • Illumination : {{ element[3] }} %</p>
+                            </div>
+                        </div>
+                        <hr>
+                        <h4><ion-icon name="calendar"></ion-icon> Calendrier lunaire des jours à venir :</h4>
+                    {% else %}
+                        <div style="display: flex; align-items: center;">
+                            <h1 style="font-size: 50px;">{{ element[1] }}</h1>
+                            <div id="moonphase-now-informations">
+                            <h1 style="font-size: 20px;">{{ element[0] }}</h1>
+                            <p style="font-size: 16px;">{{ element[4] }} • Illumination : {{ element[3] }} %</p>
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+          </div>
+        </div>
+    </div>
+
 
     <div class="modal fade" id="about" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog modal-lg">

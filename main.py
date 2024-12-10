@@ -94,6 +94,37 @@ def index():
         for i in range(0, len(data_basic["hourly"]["direct_radiation"])):
             data_basic["hourly"]["direct_radiation"][i] = int(round(data_basic["hourly"]["direct_radiation"][i], 0))
 
+
+        # Obtenir les phases lunaire
+        moonphase = []
+        for i in range(0, 8):
+            day_timestamp = int((datetime.now() + timedelta(days=i)).timestamp())
+
+            with requests.get(f"https://api.farmsense.net/v1/moonphases/?d={day_timestamp}") as r:
+                moon_api = json.loads(r.text)[0]
+                r.close()
+            
+            if moon_api["Phase"] == "New Moon":
+                moonphase.append(["Nouvelle Lune", "🌑"])
+            elif moon_api["Phase"] == "Waxing Crescent":
+                moonphase.append(["Premier Croissant", "🌒"])
+            elif moon_api["Phase"] == "First Quarter":
+                moonphase.append(["Premier Quartier", "🌓"])
+            elif moon_api["Phase"] == "Waxing Gibbous":
+                moonphase.append(["Lune gibbeuse croissante", "🌔"])
+            elif moon_api["Phase"] == "Full Moon":
+                moonphase.append(["Pleine Lune", "🌕"])
+            elif moon_api["Phase"] == "Waning Gibbous":
+                moonphase.append(["Lune gibbeuse décroissante", "🌖"])
+            elif moon_api["Phase"] == "Last Quarter":
+                moonphase.append(["Dernier Quartier", "🌗"])
+            elif moon_api["Phase"] == "Waning Crescent":
+                moonphase.append(["Dernier Croissant", "🌘"])
+
+            moonphase[i].append(round(moon_api["Age"], 1))
+            moonphase[i].append(moon_api["Illumination"]*100)
+            moonphase[i].append(datetime.fromtimestamp(day_timestamp).strftime("%d/%m/%Y"))
+
     response = make_response(
         render_template(
             "app.html",
@@ -105,7 +136,8 @@ def index():
             raw_past=data_past,
             raw_air=data_air,
             past_total=past_total,
-            notifications=notifications.entries
+            notifications=notifications.entries,
+            moon_phase=moonphase,
         )
     )
     
