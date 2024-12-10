@@ -1,16 +1,20 @@
-from flask import request, render_template, Flask, redirect, send_file, make_response
+from datetime import datetime, timedelta
+import io
 import json
-import requests
-import yaml
-from lib.proxy import *
-from lib.location import location
-from lib.settings import settings
+import os
+
+import feedparser
+import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
-import io
-import feedparser
-import os
+import requests
+import yaml
+from flask import Flask, make_response, redirect, render_template, request, send_file
+
+from lib.filters import filters
+from lib.location import location
+from lib.proxy import *
+from lib.settings import settings
 
 app = Flask(__name__)
 
