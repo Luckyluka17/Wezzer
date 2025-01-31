@@ -25,11 +25,11 @@ Pour bien débuter, nous vous recommandons de lire la [documentation](https://lu
 | Navigateur         | Statut           |
 | ---| --- |
 | <img src="https://zupimages.net/up/24/36/384b.png" width="17px" style="vertical-align: middle;"> Google Chrome ([et navigateurs dérivés](https://fr.wikipedia.org/wiki/Chromium#Autres_navigateurs_fond%C3%A9s_sur_Chromium))   | ✅ Supporté |
-| <img src="https://logodownload.org/wp-content/uploads/2019/11/firefox-logo-1.png" width="17px" style="vertical-align: middle;"> Mozilla Firefox   | ❓ Supporté (voir __*__) |
-| <img src="https://cdn.icon-icons.com/icons2/2699/PNG/512/apple_safari_logo_icon_169563.png" width="17px" style="vertical-align: middle;"> Safari            | ✅ Supporté |
+| <img src="https://logodownload.org/wp-content/uploads/2019/11/firefox-logo-1.png" width="17px" style="vertical-align: middle;"> Mozilla Firefox   | ✅ Supporté (voir __*__) |
+| <img src="https://cdn-icons-png.flaticon.com/512/668/668290.png" width="17px" style="vertical-align: middle;"> Safari            | ✅ Supporté |
 | <img src="https://logodownload.org/wp-content/uploads/2017/05/microsoft-edge-logo-8.png" width="17px" style="vertical-align: middle;"> Microsoft Edge    | ✅ Supporté |
 
-__*__: Wezzer peut présenter dans certains cas spécifiques des problèmes d'affichage.
+__*__: Sur Firefox, Wezzer peut présenter dans certains cas des problèmes d'affichage.
 
 ## Fonctionnalités
 
