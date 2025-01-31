@@ -100,15 +100,13 @@ def index():
         for i in range(0, 8):
             day_timestamp = int((datetime.now() + timedelta(days=i)).timestamp())
 
-            with requests.get(f"https://api.farmsense.net/v1/moonphases/?d={day_timestamp}") as r:
-                moon_api = json.loads(r.text)[0]
-                r.close()
+            moon_api = fetch_data(f"https://api.farmsense.net/v1/moonphases/?d={day_timestamp}", config_file)[0]
             
             if moon_api["Phase"] == "New Moon":
                 moonphase.append(["Nouvelle Lune", "🌑"])
             elif moon_api["Phase"] == "Waxing Crescent":
                 moonphase.append(["Premier Croissant", "🌒"])
-            elif moon_api["Phase"] == "First Quarter":
+            elif moon_api["Phase"] == "1st Quarter":
                 moonphase.append(["Premier Quartier", "🌓"])
             elif moon_api["Phase"] == "Waxing Gibbous":
                 moonphase.append(["Lune gibbeuse croissante", "🌔"])
