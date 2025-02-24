@@ -103,21 +103,23 @@ def index():
             moon_api = fetch_data(f"https://api.farmsense.net/v1/moonphases/?d={day_timestamp}", config_file)[0]
             
             if moon_api["Phase"] == "New Moon":
-                moonphase.append(["Nouvelle Lune", "🌑"])
+                moonphase.append(["Nouvelle lune", "🌑"])
             elif moon_api["Phase"] == "Waxing Crescent":
-                moonphase.append(["Premier Croissant", "🌒"])
+                moonphase.append(["Premier croissant", "🌒"])
             elif moon_api["Phase"] == "1st Quarter":
-                moonphase.append(["Premier Quartier", "🌓"])
+                moonphase.append(["Premier quartier", "🌓"])
             elif moon_api["Phase"] == "Waxing Gibbous":
                 moonphase.append(["Lune gibbeuse croissante", "🌔"])
             elif moon_api["Phase"] == "Full Moon":
-                moonphase.append(["Pleine Lune", "🌕"])
+                moonphase.append(["Pleine lune", "🌕"])
             elif moon_api["Phase"] == "Waning Gibbous":
                 moonphase.append(["Lune gibbeuse décroissante", "🌖"])
-            elif moon_api["Phase"] == "Last Quarter":
-                moonphase.append(["Dernier Quartier", "🌗"])
+            elif moon_api["Phase"] == "3rd Quarter":
+                moonphase.append(["Dernier quartier", "🌗"])
             elif moon_api["Phase"] == "Waning Crescent":
-                moonphase.append(["Dernier Croissant", "🌘"])
+                moonphase.append(["Dernier croissant", "🌘"])
+            elif moon_api["Phase"] == "Dark Moon":
+                moonphase.append(["Dernier croissant", "🌑"])
 
             moonphase[i].append(round(moon_api["Age"], 1))
             moonphase[i].append(moon_api["Illumination"]*100)
